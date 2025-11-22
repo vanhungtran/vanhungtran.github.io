@@ -162,7 +162,7 @@
             
             <!-- Featured Interactive Dashboard 1: Feature Selection Studio -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="feature-selection-studio">
-                <img src="https://shiny.rstudio.com/images/shiny-cheatsheet.png" alt="Feature Selection Studio" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post/FS.png" alt="Feature Selection Studio" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Feature Selection Studio</h3>
                 <p class="text-sm text-gray-600 mb-4">Interactive web application for comprehensive feature selection analysis with multiple algorithms including Random Forest, Boruta, RFE, and statistical tests.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -178,9 +178,11 @@
                 </div>
             </div>
 
+
+           
             <!-- Featured Interactive Dashboard 2: FDA Drug Approvals -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="fda-dashboard">
-                <img src="https://www.fda.gov/files/styles/featured_image_large/public/2019-06/GettyImages-922692074%20%281%29.jpg" alt="FDA Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post/FDAplus.png" alt="FDA Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">FDA Novel Drug Approvals Dashboard</h3>
                 <p class="text-sm text-gray-600 mb-4">Interactive dashboard analyzing ten years of FDA drug approval data (2015-2025) with filtering by therapeutic area, year, and company insights.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -198,7 +200,7 @@
 
             <!-- Featured Interactive Dashboard 3: CI/CD Pipeline -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="cicd-pipeline">
-                <img src="https://miro.medium.com/v2/resize:fit:1400/1*MoFImFM4nxuaUCJhP0Kp-A.png" alt="CI/CD Pipeline" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post\CICD.png" alt="CI/CD Pipeline" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">CI/CD Pipeline Implementation</h3>
                 <p class="text-sm text-gray-600 mb-4">Comprehensive CI/CD pipeline setup with automated testing, deployment, and monitoring for data science projects and web applications.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -418,7 +420,7 @@
 
             <!-- Project 12: Percutaneous Drug Absorption Study -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="drug-absorption-study">
-                <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4765686/bin/molecules-21-00207-g001.jpg" alt="Drug Absorption Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post\exvivo.jpg" alt="Drug Absorption Research" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Percutaneous Drug Absorption Optimization</h3>
                 <p class="text-sm text-gray-600 mb-4">Comparative study of enrofloxacin absorption through pig skin using LMOG organogel vs. Pentravan cream, demonstrating 3.7x enhanced drug delivery efficiency.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -438,23 +440,7 @@
                 </div>
             </div>
 
-            <!-- Project 13: Interactive Gene-Disease Network -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-network-viz">
-                <img src="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork_files/figure-html/unnamed-chunk-4-1.png" alt="Gene Network Visualization" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Interactive Gene-Disease Network Visualization</h3>
-                <p class="text-sm text-gray-600 mb-4">Developed interactive network visualization using R and visNetwork to explore gene-disease relationships with dynamic filtering, hover tooltips, and physics-based layout algorithms.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">visNetwork</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Interactive Viz</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Network Nodes</span>
-                        <span class="text-lg font-bold text-blue-600">8</span>
-                    </div>
-                </div>
-            </div>
+            <!-- Project 13: Interactive Gene-Disease Network (removed) -->
 
             <!-- Project 14: Gene Drug Interaction Network -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-drug-interaction">
@@ -737,81 +723,7 @@
                             },
                             {
                                 step: 2,
-                                title: 'Feature Engineering',
-                                description: 'Created meaningful features such as customer lifetime value, usage frequency, and engagement scores. Applied dimensionality reduction techniques to handle high-dimensional data.'
-                            },
-                            {
-                                step: 3,
-                                title: 'Model Development',
-                                description: 'Tested multiple algorithms including Random Forest, XGBoost, and Neural Networks. Used cross-validation and hyperparameter tuning to optimize model performance.'
-                            },
-                            {
-                                step: 4,
-                                title: 'Deployment & Monitoring',
-                                description: 'Deployed the model as a REST API with real-time prediction capabilities. Implemented monitoring systems to track model performance and retrain when necessary.'
-                            }
-                        ]
-                    },
-                    'sales-dashboard': {
-                        title: 'Interactive Sales Analytics Dashboard',
-                        category: 'Data Visualization',
-                        description: 'Created a comprehensive Tableau dashboard providing real-time sales insights and forecasting capabilities. The dashboard enables executives to make data-driven decisions quickly and effectively.',
-                        image: 'https://kimi-web-img.moonshot.cn/img/public.tableau.com/e669bf40111a3e83080740c82af49eee0fad88b9.png',
-                        techStack: ['Tableau', 'SQL', 'Data Modeling', 'ETL', 'AWS'],
-                        results: [
-                            { metric: 'Decision Speed', value: '60% Faster', icon: '⚡' },
-                            { metric: 'Data Accessibility', value: '100%', icon: '📊' },
-                            { metric: 'User Adoption', value: '95%', icon: '👥' }
-                        ],
-                        methodology: [
-                            {
-                                step: 1,
-                                title: 'Requirements Analysis',
-                                description: 'Conducted stakeholder interviews to understand business requirements and key performance indicators. Defined user personas and use cases.'
-                            },
-                            {
-                                step: 2,
-                                title: 'Data Architecture Design',
-                                description: 'Designed a scalable data architecture using cloud services. Implemented ETL processes to ensure data quality and consistency.'
-                            },
-                            {
-                                step: 3,
-                                title: 'Dashboard Development',
-                                description: 'Created interactive visualizations with drill-down capabilities. Implemented real-time data updates and automated reporting features.'
-                            },
-                            {
-                                step: 4,
-                                title: 'Training & Deployment',
-                                description: 'Provided comprehensive training to end users and established governance processes. Monitored usage patterns and gathered feedback for continuous improvement.'
-                            }
-                        ]
-                    },
-                    'market-basket': {
-                        title: 'Market Basket Analysis',
-                        category: 'Data Analytics',
-                        description: 'Applied association rule mining to identify product relationships and purchasing patterns. The analysis revealed valuable insights for cross-selling and upselling strategies.',
-                        image: 'https://kimi-web-img.moonshot.cn/img/assets.qlik.com/3018a0ad0c442e53fe13100e7af370e8f2862f90.png',
-                        techStack: ['R', 'Apriori', 'Association Rules', 'Data Mining', 'Statistical Analysis'],
-                        results: [
-                            { metric: 'Revenue Increase', value: '30%', icon: '📈' },
-                            { metric: 'Cross-sell Rate', value: '45% Higher', icon: '🛒' },
-                            { metric: 'Customer Insights', value: '150+ Rules', icon: '💡' }
-                        ],
-                        methodology: [
-                            {
-                                step: 1,
-                                title: 'Transaction Data Analysis',
-                                description: 'Analyzed transaction data to understand purchasing patterns and product combinations. Identified high-frequency itemsets and association rules.'
-                            },
-                            {
-                                step: 2,
-                                title: 'Algorithm Implementation',
-                                description: 'Implemented the Apriori algorithm to discover frequent itemsets and generate association rules with appropriate support and confidence thresholds.'
-                            },
-                            {
-                                step: 3,
-                                title: 'Rule Validation',
-                                description: 'Validated discovered rules using statistical significance testing and business domain knowledge. Filtered out spurious correlations.'
+                                /* 'gene-network-viz' removed */
                             },
                             {
                                 step: 4,
