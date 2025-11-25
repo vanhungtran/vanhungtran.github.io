@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Roles Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+                max-height: 500px;
+            }
+        }
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 2px solid #E5E7EB;
+            min-height: 120px;
+            flex-basis: 150px;
+            flex-grow: 1;
+            position: relative;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #9CA3AF;
+            margin: 0.5rem 1rem;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        .role-label {
+            position: absolute;
+            bottom: -12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* Specific Role Colors for Lifecycle */
+        .role-engineer { background-color: #118AB2; }
+        .role-manager { background-color: #06D6A0; }
+        .role-analyst { background-color: #FFD166; color: #333 !important; } /* Dark text for contrast */
+        .role-scientist { background-color: #EF476F; }
+        .role-biostat { background-color: #9B5DE5; }
+        .role-bioinfo { background-color: #F15BB5; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#118AB2',
+                        secondary: '#06D6A0',
+                        accent1: '#FFD166',
+                        accent2: '#EF476F',
+                        accent3: '#9B5DE5',
+                        accent4: '#F15BB5',
+                        dark: '#073B4C',
+                        light: '#FFFFFF',
+                        bglight: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bglight text-dark font-inter">
+
+    <header class="bg-dark text-white p-6 shadow-lg">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-secondary mb-2">Data Horizons</h1>
+            <h2 class="text-xl md:text-2xl font-light text-bglight">A Comparative Guide to 6 Key Data Roles</h2>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <p class="text-lg md:text-xl text-center text-gray-700 leading-relaxed">
+                The world runs on data, but the journey from raw numbers to actionable insight is complex, requiring a team of specialists. This guide explores six critical roles: Data Engineers, Data Managers, Data Analysts, Data Scientists, Biostatisticians, and Bioinformaticians. While their tasks often overlap, their core focus and primary value are distinct.
+            </p>
+        </section>
+
+        <!-- Updated Data Lifecycle Section with Specific Role Colors -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-primary mb-6">The Data Lifecycle & Where They Fit</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
+                A simplified data lifecycle shows how information flows from creation to impact. Different roles shepherd the data through each phase, ensuring it's available, clean, and ultimately, valuable.
+            </p>
+            <div class="flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-2 pb-4">
+                <div class="flow-step">
+                    <span class="text-xs font-bold text-gray-400 uppercase mb-1">Phase 1</span>
+                    <h3 class="text-lg font-bold text-dark">Build & Collect</h3>
+                    <p class="text-sm text-gray-600 mt-2">Create infrastructure and pipelines to acquire raw data.</p>
+                    <span class="role-label role-engineer">Data Engineer</span>
+                </div>
+                <div class="flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="flow-step">
+                    <span class="text-xs font-bold text-gray-400 uppercase mb-1">Phase 2</span>
+                    <h3 class="text-lg font-bold text-dark">Govern & Manage</h3>
+                    <p class="text-sm text-gray-600 mt-2">Ensure data is clean, secure, compliant, and accessible.</p>
+                    <span class="role-label role-manager">Data Manager</span>
+                </div>
+                <div class="flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="flow-step">
+                    <span class="text-xs font-bold text-gray-400 uppercase mb-1">Phase 3</span>
+                    <h3 class="text-lg font-bold text-dark">Analyze & Report</h3>
+                    <p class="text-sm text-gray-600 mt-2">Query data to answer business questions and track performance.</p>
+                    <span class="role-label role-analyst">Data Analyst</span>
+                </div>
+                <div class="flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="flow-step">
+                    <span class="text-xs font-bold text-gray-400 uppercase mb-1">Phase 4</span>
+                    <h3 class="text-lg font-bold text-dark">Model & Predict</h3>
+                    <p class="text-sm text-gray-600 mt-2">Use data to forecast trends and build intelligent systems.</p>
+                    <span class="role-label role-scientist">Data Scientist</span>
+                </div>
+                <div class="flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="flow-step">
+                    <span class="text-xs font-bold text-gray-400 uppercase mb-1">Phase 5</span>
+                    <h3 class="text-lg font-bold text-dark">Interpret & Apply</h3>
+                    <p class="text-sm text-gray-600 mt-2">Apply domain-specific statistical rigor and interpretation.</p>
+                    <div class="flex gap-1 absolute -bottom-3 left-1/2 transform -translate-x-1/2">
+                         <span class="role-label relative bottom-0 left-0 transform-none text-[0.65rem] px-2 role-biostat">Biostat</span>
+                         <span class="role-label relative bottom-0 left-0 transform-none text-[0.65rem] px-2 role-bioinfo">Bioinfo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8 md:col-span-2">
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-primary mb-4">Core Task Focus</h2>
+            <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">
+                This radar chart compares the relative focus of each role across key task domains. A score of 10 represents the highest possible focus for a role in that area. <span class="font-bold">Each role is now represented by its unique color from the lifecycle above.</span>
+            </p>
+            <div class="chart-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8 md:col-span-2">
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-primary mb-4">Relative Skill Focus</h2>
+            <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">
+                Each role is a unique blend of skills. This chart shows the approximate composition of their expertise, broken down into four key areas. Note the high domain knowledge required for the "Bio-" roles and the engineering focus of the Data Engineer.
+            </p>
+            <div class="chart-container">
+                <canvas id="stackedBarChart"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl md:text-3xl font-bold text-center text-primary mb-8">Role Deep Dive</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Data Engineer</h3>
+                    <p class="text-lg font-semibold text-primary mb-4">"The Architect"</p>
+                    <p class="text-gray-700 mb-4">Builds and maintains the data "factory," ensuring robust, scalable data pipelines are available for everyone else.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Designing & building ETL/ELT pipelines</li>
+                        <li>Managing data warehouses & data lakes</li>
+                        <li>Optimizing database performance</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">SQL, Python (Airflow, Spark), Kafka, Cloud (AWS, GCP, Azure)</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-secondary">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Data Manager</h3>
+                    <p class="text-lg font-semibold text-secondary mb-4">"The Guardian"</p>
+                    <p class="text-gray-700 mb-4">Ensures data integrity, quality, security, and compliance. Critical in regulated fields like clinical trials.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Overseeing data entry and collection</li>
+                        <li>Performing data quality control (QC)</li>
+                        <li>Ensuring regulatory compliance (e.g., GCP, HIPAA)</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">Clinical Data Management Systems (CDMS), SQL, SAS</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-accent1">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Data Analyst</h3>
+                    <p class="text-lg font-semibold text-accent1 mb-4">"The Storyteller"</p>
+                    <p class="text-gray-700 mb-4">Answers specific business questions by querying, cleaning, analyzing, and visualizing historical data.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Building dashboards (Tableau, Power BI)</li>
+                        <li>Writing complex SQL queries</li>
+                        <li>Generating reports and identifying trends</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">SQL, Tableau, Power BI, Excel, R/Python (basic)</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-accent2">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Data Scientist</h3>
+                    <p class="text-lg font-semibold text-accent2 mb-4">"The Forecaster"</p>
+                    <p class="text-gray-700 mb-4">Uses statistical methods and machine learning to build predictive models and uncover deep, complex insights.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Developing & deploying machine learning models</li>
+                        <li>Exploratory Data Analysis (EDA)</li>
+                        <li>Hypothesis testing and experimentation</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">Python (Pandas, Scikit-learn, TensorFlow), R, SQL</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-accent3">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Biostatistician</h3>
+                    <p class="text-lg font-semibold text-accent3 mb-4">"The Validator"</p>
+                    <p class="text-gray-700 mb-4">Applies rigorous statistical theory to design studies and analyze data in public health, biology, and medicine.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Designing clinical trials & experiments</li>
+                        <li>Performing survival analysis & modeling</li>
+                        <li>Interpreting and reporting study results</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">R, SAS, Python, specialized statistical software</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-accent4">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Bioinformatician</h3>
+                    <p class="text-lg font-semibold text-accent4 mb-4">"The Specialist"</p>
+                    <p class="text-gray-700 mb-4">A hybrid scientist who uses computation to analyze massive biological datasets like DNA, RNA, and protein sequences.</p>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Key Tasks:</h4>
+                    <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+                        <li>Genomic sequence alignment & analysis</li>
+                        <li>Gene expression & pathway analysis</li>
+                        <li>Developing computational biology tools</li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-dark mb-2">Primary Tools:</h4>
+                    <p class="text-gray-700">Python (Biopython), R (Bioconductor), Perl, Bash</p>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="bg-dark text-white rounded-lg p-6 mt-8 text-center">
+            <p class="text-lg">While each role is distinct, <span class="font-bold text-secondary">collaboration</span> is the key. No single role can master the entire data journey. Success lies in understanding where expertise begins and ends, and how these specialists work together to turn data into discovery.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hexToRgba = (hex, alpha) => {
+                const r = parseInt(hex.slice(1, 3), 16);
+                const g = parseInt(hex.slice(3, 5), 16);
+                const b = parseInt(hex.slice(5, 7), 16);
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            // Defined Role Colors
+            const roleColors = {
+                engineer: '#118AB2',   // Blue
+                manager: '#06D6A0',    // Green
+                analyst: '#FFD166',    // Yellow
+                scientist: '#EF476F',  // Red/Pink
+                biostat: '#9B5DE5',    // Purple
+                bioinfo: '#F15BB5'     // Hot Pink
+            };
+
+            const radarCtx = document.getElementById('radarChart');
+            if (radarCtx) {
+                new Chart(radarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: [
+                            'Infra/Pipelines',
+                            'Data Governance',
+                            'BI/Reporting',
+                            'ML Modeling',
+                            ['Statistical', 'Design'],
+                            ['Biology/Domain', 'Analysis']
+                        ],
+                        datasets: [
+                            {
+                                label: 'Data Engineer',
+                                data: [10, 4, 2, 3, 1, 1],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.engineer, 0.1),
+                                borderColor: roleColors.engineer,
+                                pointBackgroundColor: roleColors.engineer,
+                                pointRadius: 4,
+                            },
+                            {
+                                label: 'Data Manager',
+                                data: [3, 10, 5, 1, 4, 3],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.manager, 0.1),
+                                borderColor: roleColors.manager,
+                                pointBackgroundColor: roleColors.manager,
+                                pointRadius: 4,
+                            },
+                            {
+                                label: 'Data Analyst',
+                                data: [2, 5, 10, 3, 4, 5],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.analyst, 0.1),
+                                borderColor: roleColors.analyst,
+                                pointBackgroundColor: roleColors.analyst,
+                                pointRadius: 4,
+                            },
+                            {
+                                label: 'Data Scientist',
+                                data: [4, 4, 7, 10, 7, 8],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.scientist, 0.1),
+                                borderColor: roleColors.scientist,
+                                pointBackgroundColor: roleColors.scientist,
+                                pointRadius: 4,
+                            },
+                            {
+                                label: 'Biostatistician',
+                                data: [1, 6, 5, 7, 10, 9],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.biostat, 0.1),
+                                borderColor: roleColors.biostat,
+                                pointBackgroundColor: roleColors.biostat,
+                                pointRadius: 4,
+                            },
+                            {
+                                label: 'Bioinformatician',
+                                data: [3, 4, 5, 8, 7, 10],
+                                fill: false,
+                                backgroundColor: hexToRgba(roleColors.bioinfo, 0.1),
+                                borderColor: roleColors.bioinfo,
+                                pointBackgroundColor: roleColors.bioinfo,
+                                pointRadius: 4,
+                            }
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            },
+                            legend: {
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            r: {
+                                grid: { color: '#ddd' },
+                                angleLines: { color: '#ddd' },
+                                pointLabels: {
+                                    font: { size: 12, weight: 'bold' },
+                                    color: '#073B4C'
+                                },
+                                ticks: {
+                                    display: false, // Hiding ticks to declutter
+                                    maxTicksLimit: 5
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const stackedBarCtx = document.getElementById('stackedBarChart');
+            if (stackedBarCtx) {
+                new Chart(stackedBarCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'Data Engineer',
+                            'Data Manager',
+                            'Data Analyst',
+                            'Data Scientist',
+                            'Biostatistician',
+                            ['Bioinfor-', 'matician']
+                        ],
+                        datasets: [
+                            {
+                                label: 'Engineering/CS',
+                                data: [60, 15, 10, 30, 10, 35],
+                                backgroundColor: roleColors.engineer,
+                            },
+                            {
+                                label: 'Math/Stats',
+                                data: [10, 10, 25, 35, 50, 25],
+                                backgroundColor: roleColors.biostat, // Reusing Biostat purple for Stats focus
+                            },
+                            {
+                                label: 'Domain (Bio/Biz)',
+                                data: [10, 45, 45, 20, 30, 40],
+                                backgroundColor: roleColors.manager, // Reusing Manager green for Domain
+                            },
+                            {
+                                label: 'Governance/Ops',
+                                data: [20, 30, 20, 15, 10, 0],
+                                backgroundColor: roleColors.analyst, // Reusing Analyst yellow for Ops
+                            }
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    title: (tooltipItems) => {
+                                        const item = tooltipItems[0];
+                                        let label = item.chart.data.labels[item.dataIndex];
+                                        if (Array.isArray(label)) {
+                                            return label.join('');
+                                        } else {
+                                            return label;
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: { display: false },
+                                ticks: {
+                                    color: '#073B4C',
+                                    font: { weight: 'bold' }
+                                }
+                            },
+                            y: {
+                                stacked: true,
+                                grid: { color: '#eee' },
+                                ticks: {
+                                    callback: (value) => value + '%',
+                                    color: '#073B4C',
+                                    font: { weight: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
