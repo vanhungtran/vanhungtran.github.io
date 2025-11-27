@@ -95,7 +95,7 @@
                     <a href="index.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Portfolio</a>
                     <a href="projects.html" class="text-blue-600 font-medium">Projects</a>
                     <a href="blog.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Blog</a>
-                    <a href="CVLucasTRAN.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-500 font-medium transition-colors flex items-center">
+                    <a href="CVLucasTRAN.pdf" target="_blank" class="text-gray-700 hover:text-blue-500 font-medium transition-colors flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
@@ -160,6 +160,25 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
             
+            <!-- NEW: CyTOF Data Analysis Workflow -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="cytof-workflow">
+                <img src="https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g001.jpg" alt="CyTOF Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">CyTOF Data Analysis Workflow</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive bioinformatics workflow for mass cytometry (CyTOF) data analysis. Features automated cell population identification, differential abundance/state analysis, and advanced visualization using R/Bioconductor.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">CyTOF</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Bioconductor</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">FlowSOM</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Interactive Workflow</span>
+                        <a href="https://vanhungtran.github.io/CyTOFworkflow/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Featured Interactive Dashboard 1: Feature Selection Studio -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="feature-selection-studio">
                 <img src="Post/FS.png" alt="Feature Selection Studio" class="w-full h-48 object-cover rounded-xl mb-4">
@@ -173,13 +192,11 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">Live Application</span>
-                        <a href="https://vanhungtran.shinyapps.io/FSplus/" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
+                        <a href="https://vanhungtran.shinyapps.io/FSplus/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
                     </div>
                 </div>
             </div>
 
-
-           
             <!-- Featured Interactive Dashboard 2: FDA Drug Approvals -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="fda-dashboard">
                 <img src="Post/FDAplus.png" alt="FDA Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
@@ -193,14 +210,14 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">Live Dashboard</span>
-                        <a href="https://vanhungtran.shinyapps.io/shiapp/" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-green-600 hover:underline">View →</a>
+                        <a href="https://vanhungtran.shinyapps.io/shiapp/" target="_blank" class="text-lg font-bold text-green-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
             <!-- Featured Interactive Dashboard 3: CI/CD Pipeline -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="cicd-pipeline">
-                <img src="Post\CICD.png" alt="CI/CD Pipeline" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post/CICD.png" alt="CI/CD Pipeline" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">CI/CD Pipeline Implementation</h3>
                 <p class="text-sm text-gray-600 mb-4">Comprehensive CI/CD pipeline setup with automated testing, deployment, and monitoring for data science projects and web applications.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -211,7 +228,7 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">Live Implementation</span>
-                        <a href="https://vanhungtran.github.io/CICD/" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-orange-600 hover:underline">View →</a>
+                        <a href="https://vanhungtran.github.io/CICD/" target="_blank" class="text-lg font-bold text-orange-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
@@ -395,7 +412,7 @@
                     </div>
                     <div class="flex justify-between items-center mt-2">
                         <span class="text-sm font-medium text-gray-700">Research Paper</span>
-                        <a href="https://onlinelibrary.wiley.com/doi/10.1111/all.16588" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                        <a href="https://onlinelibrary.wiley.com/doi/10.1111/all.16588" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
@@ -420,7 +437,7 @@
 
             <!-- Project 12: Percutaneous Drug Absorption Study -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="drug-absorption-study">
-                <img src="Post\exvivo.jpg" alt="Drug Absorption Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post/exvivo.jpg" alt="Drug Absorption Research" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Percutaneous Drug Absorption Optimization</h3>
                 <p class="text-sm text-gray-600 mb-4">Comparative study of enrofloxacin absorption through pig skin using LMOG organogel vs. Pentravan cream, demonstrating 3.7x enhanced drug delivery efficiency.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -435,12 +452,28 @@
                     </div>
                     <div class="flex justify-between items-center mt-2">
                         <span class="text-sm font-medium text-gray-700">Research Paper</span>
-                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378517315304191?via%3Dihub" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378517315304191?via%3Dihub" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 13: Interactive Gene-Disease Network (removed) -->
+            <!-- Project 13: Interactive Gene-Disease Network -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-network-viz">
+                <img src="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork_files/figure-html/unnamed-chunk-4-1.png" alt="Gene Network Visualization" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Interactive Gene-Disease Network Visualization</h3>
+                <p class="text-sm text-gray-600 mb-4">Developed interactive network visualization using R and visNetwork to explore gene-disease relationships with dynamic filtering, hover tooltips, and physics-based layout algorithms.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">visNetwork</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Interactive Viz</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Network Nodes</span>
+                        <span class="text-lg font-bold text-blue-600">8</span>
+                    </div>
+                </div>
+            </div>
 
             <!-- Project 14: Gene Drug Interaction Network -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-drug-interaction">
@@ -491,14 +524,14 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">Live Application</span>
-                        <a href="https://vanhungtran.shinyapps.io/Aging/" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
+                        <a href="https://vanhungtran.shinyapps.io/Aging/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
                     </div>
                 </div>
             </div>
 
             <!-- Project 17: Atopic Dermatitis & Psoriasis Genomic Analysis -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="genomic-dashboard">
-                <img src="https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g002.jpg" alt="Genomic Analysis Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="Post/AD_Pso.png" alt="Genomic Analysis Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Atopic Dermatitis & Psoriasis: Genomic Analysis</h3>
                 <p class="text-sm text-gray-600 mb-4">Interactive genomic analysis dashboard exploring molecular overlaps between AD and Psoriasis using GEO datasets with Chart.js visualizations.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -509,16 +542,14 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">View Dashboard</span>
-                        <a href="genomic-dashboard.html" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-red-600 hover:underline">Launch →</a>
+                        <a href="genomic-dashboard.html" target="_blank" class="text-lg font-bold text-red-600 hover:underline">Launch →</a>
                     </div>
                 </div>
             </div>
 
-
-
-            <!-- Project 18: Computer Vision System -->
+            <!-- Project 17: Computer Vision System -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="computer-vision">
-                <img src="Post/computervision.jpg" alt="Computer Vision" class="w-full h-48 object-cover rounded-xl mb-4">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.geckoboard.com/2605fd517d3e4a523710fe881153ce20c0a09c60.png" alt="Computer Vision" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Quality Control Vision System</h3>
                 <p class="text-sm text-gray-600 mb-4">Implemented a deep learning-based computer vision system for automated quality control, reducing defect detection time by 85%.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -534,7 +565,7 @@
                 </div>
             </div>
 
-            <!-- Project 19: Shrinkage Estimation -->
+            <!-- Project 18: Shrinkage Estimation -->
             <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="shrinkage-estimation">
                 <img src="Post/shrinkage_Estimators.png" alt="Shrinkage Estimation" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Shrinkage Estimation Methods</h3>
@@ -547,29 +578,9 @@
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-medium text-gray-700">Interactive Demo</span>
-                        <a href="https://vanhungtran.github.io/ShrinkageEstimation" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-purple-600 hover:underline">Explore →</a>
+                        <a href="https://vanhungtran.github.io/ShrinkageEstimation" target="_blank" class="text-lg font-bold text-purple-600 hover:underline">Explore →</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Project 20: eBook: R for MS-->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="resource" data-project="r-for-ms-ebook">
-                    <img src="Post/cover.png" alt="R for MS eBook" class="w-full h-48 object-cover rounded-xl mb-4">
-                    <h3 class="font-semibold text-gray-800 mb-2">R for Medical Statistics (eBook)</h3>
-                    <p class="text-sm text-gray-600 mb-4">Open-access eBook with practical R examples and code for medical statistics.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
-                        <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">eBook</span>
-                        <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Teaching</span>
-                    </div>
-                    <div class="impact-metric p-3 rounded-lg">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-medium text-gray-700">Read Online</span>
-                            <a href="https://vanhungtran.github.io/RforMS/" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-blue-600 hover:underline">Open →</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -723,7 +734,81 @@
                             },
                             {
                                 step: 2,
-                                /* 'gene-network-viz' removed */
+                                title: 'Feature Engineering',
+                                description: 'Created meaningful features such as customer lifetime value, usage frequency, and engagement scores. Applied dimensionality reduction techniques to handle high-dimensional data.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Model Development',
+                                description: 'Tested multiple algorithms including Random Forest, XGBoost, and Neural Networks. Used cross-validation and hyperparameter tuning to optimize model performance.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Deployment & Monitoring',
+                                description: 'Deployed the model as a REST API with real-time prediction capabilities. Implemented monitoring systems to track model performance and retrain when necessary.'
+                            }
+                        ]
+                    },
+                    'sales-dashboard': {
+                        title: 'Interactive Sales Analytics Dashboard',
+                        category: 'Data Visualization',
+                        description: 'Created a comprehensive Tableau dashboard providing real-time sales insights and forecasting capabilities. The dashboard enables executives to make data-driven decisions quickly and effectively.',
+                        image: 'https://kimi-web-img.moonshot.cn/img/public.tableau.com/e669bf40111a3e83080740c82af49eee0fad88b9.png',
+                        techStack: ['Tableau', 'SQL', 'Data Modeling', 'ETL', 'AWS'],
+                        results: [
+                            { metric: 'Decision Speed', value: '60% Faster', icon: '⚡' },
+                            { metric: 'Data Accessibility', value: '100%', icon: '📊' },
+                            { metric: 'User Adoption', value: '95%', icon: '👥' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Requirements Analysis',
+                                description: 'Conducted stakeholder interviews to understand business requirements and key performance indicators. Defined user personas and use cases.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Data Architecture Design',
+                                description: 'Designed a scalable data architecture using cloud services. Implemented ETL processes to ensure data quality and consistency.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Dashboard Development',
+                                description: 'Created interactive visualizations with drill-down capabilities. Implemented real-time data updates and automated reporting features.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Training & Deployment',
+                                description: 'Provided comprehensive training to end users and established governance processes. Monitored usage patterns and gathered feedback for continuous improvement.'
+                            }
+                        ]
+                    },
+                    'market-basket': {
+                        title: 'Market Basket Analysis',
+                        category: 'Data Analytics',
+                        description: 'Applied association rule mining to identify product relationships and purchasing patterns. The analysis revealed valuable insights for cross-selling and upselling strategies.',
+                        image: 'https://kimi-web-img.moonshot.cn/img/assets.qlik.com/3018a0ad0c442e53fe13100e7af370e8f2862f90.png',
+                        techStack: ['R', 'Apriori', 'Association Rules', 'Data Mining', 'Statistical Analysis'],
+                        results: [
+                            { metric: 'Revenue Increase', value: '30%', icon: '📈' },
+                            { metric: 'Cross-sell Rate', value: '45% Higher', icon: '🛒' },
+                            { metric: 'Customer Insights', value: '150+ Rules', icon: '💡' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Transaction Data Analysis',
+                                description: 'Analyzed transaction data to understand purchasing patterns and product combinations. Identified high-frequency itemsets and association rules.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Algorithm Implementation',
+                                description: 'Implemented the Apriori algorithm to discover frequent itemsets and generate association rules with appropriate support and confidence thresholds.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Rule Validation',
+                                description: 'Validated discovered rules using statistical significance testing and business domain knowledge. Filtered out spurious correlations.'
                             },
                             {
                                 step: 4,
@@ -1221,7 +1306,7 @@ shinyApp(ui = ui, server = server)`
                         title: 'FDA Novel Drug Approvals Dashboard (2015-2025)',
                         category: 'Pharmaceutical Regulatory Analytics',
                         description: 'Comprehensive interactive dashboard analyzing a decade of FDA novel drug approvals with advanced filtering, trend analysis, and regulatory insights. This application provides pharmaceutical researchers, regulators, and industry professionals with detailed views of approval patterns, therapeutic areas, company performance, and regulatory timelines across the most recent 10-year period.',
-                        image: 'https://www.fda.gov/files/styles/featured_image_large/public/2019-06/GettyImages-922692074%20%281%29.jpg',
+                        image: 'Post/FDAplus.png',
                         techStack: ['R', 'Shiny', 'FDA Data', 'Regulatory Analytics', 'Plotly', 'DT', 'Time Series Analysis', 'Pharmaceutical Intelligence'],
                         results: [
                             { metric: 'Years of Data', value: '10', icon: '📅' },
