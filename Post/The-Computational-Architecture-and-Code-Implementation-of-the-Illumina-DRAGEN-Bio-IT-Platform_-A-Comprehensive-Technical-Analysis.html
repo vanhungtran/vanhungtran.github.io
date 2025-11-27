@@ -6,7 +6,7 @@
     <meta name="generator" content="pandoc" />
 
     
-        <meta name="date" content="2025-11-26" />
+        <meta name="date" content="2025-11-27" />
     
     <title>The Computational Architecture and Code Implementation of the Illumina DRAGEN Bio-IT Platform: A Comprehensive Technical Analysis</title>
 
@@ -1299,7 +1299,7 @@ Comprehensive Technical Analysis</strong></a></h2>
       </ul>
     </div>
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
-                  <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2025-11-26</p>
+                  <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2025-11-27</p>
           </div>
    </div>
      
@@ -1323,13 +1323,13 @@ infrastructure costs. The Illumina DRAGEN (Dynamic Read Analysis for
 GENomics) Bio-IT Platform addresses this disparity through a radical
 architectural departure, utilizing Field-Programmable Gate Array (FPGA)
 technology to implement genomic algorithms in hardware logic circuits
-rather than software instructions [1].</p>
+rather than software instructions<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>This platform achieves ultra-rapid secondary analysis, processing a
 30x whole-genome in approximately 25 minutes and a 100x whole-exome in
 roughly 8 minutes—representing a 10- to 15-fold acceleration compared to
-traditional CPU-based workflows like BWA-GATK.20 This report provides an
-exhaustive technical examination of the code ecosystem surrounding the
-DRAGEN platform. While the core processing logic resides within
+traditional CPU-based workflows like BWA-GATK[^20] This report provides
+an exhaustive technical examination of the code ecosystem surrounding
+the DRAGEN platform. While the core processing logic resides within
 proprietary FPGA bitstreams, the “code” accessible to bioinformaticians
 constitutes a sophisticated control layer. This includes the monolithic
 dragen command-line interface (CLI) that orchestrates hardware
@@ -1348,14 +1348,15 @@ heterogeneous computing model. Unlike the Burrows-Wheeler Aligner (BWA)
 or the Genome Analysis Toolkit (GATK), which execute sequentially on
 general-purpose CPU cores, DRAGEN offloads the most computationally
 intensive kernels—specifically Smith-Waterman alignment, Hidden Markov
-Model (HMM) processing, and De Bruijn graph assembly—to the FPGA.20</p>
+Model (HMM) processing, and De Bruijn graph assembly—to the
+FPGA[^20]</p>
 <p>The FPGA functions as a reconfigurable integrated circuit. In the
 context of DRAGEN, the logic gates are physically arranged to create a
 data pipeline where genomic reads flow through the processor. This
 allows operations such as mapping, alignment, sorting, duplicate
 marking, and variant calling to occur in a single pass, often streaming
 data directly from input FASTQ files to output Variant Call Format (VCF)
-files without intermediate disk I/O.3</p>
+files without intermediate disk I/O<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 </div>
 <div id="streaming-dataflow-architecture" class="section level3">
 <h3><strong>2.2 Streaming Dataflow Architecture</strong></h3>
@@ -1376,35 +1377,33 @@ position and PCR duplicates are flagged in memory.<br />
 (SVs), and copy number variants (CNVs) are detected
 simultaneously.<br />
 This design significantly reduces memory pressure and cache misses
-compared to batch-oriented processing.20</li>
+compared to batch-oriented processing[^20]</li>
 </ol>
 </div>
 <div id="deployment-environments-and-infrastructure-code" class="section level3">
-<h3><strong>2.3 Deployment Environments and Infrastructure
+<h3><strong>2<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Deployment Environments and Infrastructure
 Code</strong></h3>
 <p>The code detailed in this report operates within specific
 infrastructure constraints:</p>
 <ul>
 <li><strong>On-Premises Servers</strong>: Rack-mounted servers
 containing DRAGEN FPGA cards. Scripts running here often utilize local
-high-performance storage (NVMe) for staging inputs.5<br />
+high-performance storage (NVMe) for <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a><br />
 </li>
 <li><strong>On-Instrument</strong>: The NovaSeq X Series and NextSeq
 1000/2000 integrate DRAGEN processors directly into the instrument
 controller, enabling analysis to run in parallel with
-sequencing.20<br />
+sequencing[^20]<br />
 </li>
 <li><strong>Amazon EC2 F1 Instances</strong>: The cloud implementation
 utilizes AWS f1.2xlarge and f1.4xlarge instances, which provide
 virtualized access to Xilinx Virtex UltraScale+ FPGAs.
 Infrastructure-as-Code (IaC) templates are used to provision these
-instances.6<br />
-</li>
+instances<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></li>
 <li><strong>Illumina Connected Analytics (ICA)</strong>: A managed
 platform where the hardware abstraction is handled by the scheduler.
 Here, the “code” shifts from shell scripts to pipeline definitions (XML,
-Nextflow) that request specific resource classes (e.g.,
-fpga2-medium).3</li>
+Nextflow) that request specific resource classes (e.g., fpga2-medium)<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></li>
 </ul>
 </div>
 </div>
@@ -1521,7 +1520,7 @@ haplotypes (from 1000 Genomes, gnomAD).<br />
 <li><strong>Alt-Aware Mapping:</strong> Reads matching population
 haplotypes are preferentially aligned to graph paths, then lifted over
 to the primary assembly. This reduces reference bias and improves
-accuracy in complex regions.20</li>
+accuracy in complex regions[^20]</li>
 </ul>
 <p>Bash</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">dragen</span> <span class="at">--build-hash-table</span> true <span class="dt">\\</span></span>
@@ -1531,10 +1530,11 @@ accuracy in complex regions.20</li>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="ex">--enable-rna</span> true</span></code></pre></div>
 <p>The --enable-cnv true flag instructs the builder to pre-calculate GC
 content windows, which is essential for the self-normalization and Copy
-Number Variant calling modules.20</p>
+Number Variant calling modules[^20]</p>
 </div>
 <div id="read-group-configuration-and-metadata" class="section level3">
-<h3><strong>3.3 Read Group Configuration and Metadata</strong></h3>
+<h3><strong>3<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> Read Group Configuration and
+Metadata</strong></h3>
 <p>In production environments, precise metadata management is mandatory.
 The DRAGEN CLI injects Read Group (<span class="citation">@RG</span>)
 headers directly into the output BAM during the alignment process.</p>
@@ -1559,14 +1559,14 @@ in recent versions), which rescores variants to reduce false positives
 and recover false negatives.</p>
 <ul>
 <li><strong>Small Variants:</strong> F-measures of 99.86% for
-substitutions and 99.80% for indels on benchmarks.20<br />
+substitutions and 99.80% for indels on benchmarks[^20]<br />
 </li>
 <li><strong>Structural Variants (SV):</strong> The caller extends the
 Manta algorithm with improved mobile element insertion (MEI) detection
-and refined contig alignment.20<br />
+and refined contig alignment[^20]<br />
 </li>
 <li><strong>Copy Number Variants (CNV):</strong> Implements a modified
-Shifting Levels Model using the Viterbi algorithm.20</li>
+Shifting Levels Model using the Viterbi algorithm[^20]</li>
 </ul>
 </div>
 </div>
@@ -1647,7 +1647,7 @@ Code Block 2: ICA Pod Annotation</p>
 provisioning of a DRAGEN-capable node.</p>
 </div>
 <div id="a-complete-nextflow-workflow" class="section level3">
-<h3><strong>4.3 A Complete Nextflow Workflow</strong></h3>
+<h3><strong>4<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> A Complete Nextflow Workflow</strong></h3>
 <p>While a single process is the building block, a complete workflow
 definition is required to run a pipeline. The following example shows a
 simple workflow that takes a channel of reads, runs the DRAGEN process,
@@ -1708,7 +1708,7 @@ replacing BWA-MEM with <strong>DRAGMAP</strong> and configuring
     &gt;&gt;&gt;
 
     runtime {
-        docker: &quot;us.gcr.io/broad-gotc-prod/dragmap:1.3.0&quot;
+        docker: &quot;us.gcr.io/broad-gotc-prod/dragmap:1[^3].0&quot;
         memory: &quot;${memory_gb} GB&quot;
         cpu: cpu
         disks: &quot;local-disk 200 HDD&quot;
@@ -1751,7 +1751,7 @@ Command</strong></p>
 machine learning filtering and specific biomarker reporting for
 <strong>Tumor Mutation Burden (TMB)</strong>, <strong>Microsatellite
 Instability (MSI)</strong>, and <strong>Homologous Recombination
-Deficiency (HRD)</strong> status.20</p>
+Deficiency (HRD)</strong> status[^20]</p>
 </div>
 <div id="population-genomics-iterative-gvcf-genotyper" class="section level3">
 <h3><strong>6.2 Population Genomics (Iterative gVCF
@@ -1759,10 +1759,10 @@ Genotyper)</strong></h3>
 <p>For large cohort analysis, DRAGEN includes the <strong>Iterative gVCF
 Genotyper (IGG)</strong>. This tool allows for cohort-scale joint
 calling without full re-genotyping, enabling incremental biobank
-expansion (e.g., UK Biobank processing ~500,000 genomes).20</p>
+expansion (e.g., UK Biobank processing ~500,000 genomes)[^20]</p>
 </div>
 <div id="multiomics-integration" class="section level3">
-<h3><strong>6.3 Multiomics Integration</strong></h3>
+<h3><strong>6<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> Multiomics Integration</strong></h3>
 <p>Newer releases support simultaneous analysis of:</p>
 <ul>
 <li><strong>Transcriptomics:</strong> RNA-seq for gene expression and
@@ -1772,7 +1772,7 @@ fusion detection.<br />
 Prep.<br />
 </li>
 <li><strong>Proteomics:</strong> Integration with Illumina Protein Prep
-data.20</li>
+data[^20]</li>
 </ul>
 </div>
 <div id="rna-seq-analysis" class="section level3">
@@ -1806,15 +1806,15 @@ Equivalence</strong></h2>
 <h3><strong>7.1 Computational Economics</strong></h3>
 <ul>
 <li><strong>Speed:</strong> DRAGEN hardware processes a 30x genome in
-~25 minutes, compared to &gt;10 hours for CPU-based BWA-GATK.20<br />
+~25 minutes, compared to &gt;10 hours for CPU-based BWA-GATK[^20]<br />
 </li>
 <li><strong>Cost:</strong> On-premises DRAGEN servers can achieve
 compute costs below <strong>$0.10 USD per 30x WGS sample</strong>
 (amortized over a 5-year lifecycle), compared to significantly higher
-costs ($0.60 - $3.00+) for cloud GPU or CPU instances.20<br />
+costs ($0.60 - $3.00+) for cloud GPU or CPU instances[^20]<br />
 </li>
 <li><strong>Energy:</strong> On-instrument analysis (NovaSeq X) is
-highly energy-efficient, requiring ~0.0036 kWh per 30x WGS.20</li>
+highly energy-efficient, requiring ~0.0036 kWh per 30x WGS[^20]</li>
 </ul>
 </div>
 <div id="functional-equivalence-fe" class="section level3">
@@ -1838,7 +1838,7 @@ orchestration layers—Nextflow (nf-dragen) and WDL (DRAGEN-GATK)—which
 manage the complex data flows required to drive the hardware at scale.
 With the introduction of the NovaSeq X, this code is now often embedded
 directly into the sequencing instrument, further streamlining the path
-from biological sample to clinical insight.20</p>
+from biological sample to clinical insight[^20]</p>
 <p><strong>Table 2: Summary of Key Code Components</strong></p>
 <table>
 <colgroup>
@@ -1907,66 +1907,30 @@ from biological sample to clinical insight.20</p>
 research snippets.</em></p>
 <div id="works-cited" class="section level4">
 <h4><strong>Works cited</strong></h4>
-<ol style="list-style-type: decimal">
-<li>DRAGEN™ secondary analysis - Illumina, accessed November 26, 2025,
-<a href="https://www.illumina.com/content/dam/illumina/gcs/assembled-assets/marketing-literature/dragen-bio-it-data-sheet-m-gl-00680/dragen-bio-it-data-sheet-m-gl-00680.pdf">https://www.illumina.com/content/dam/illumina/gcs/assembled-assets/marketing-literature/dragen-bio-it-data-sheet-m-gl-00680/dragen-bio-it-data-sheet-m-gl-00680.pdf</a><br />
-</li>
-<li>DRAGEN Accuracy Application Note - Illumina, accessed November 26,
-2025, <a href="https://www.illumina.com/content/dam/illumina-marketing/documents/products/datasheets/dragen-v3-accuracy-appnote-970-2019-006-translations/dragen-v3-accuracy-appnote-970-2019-006.pdf">https://www.illumina.com/content/dam/illumina-marketing/documents/products/datasheets/dragen-v3-accuracy-appnote-970-2019-006-translations/dragen-v3-accuracy-appnote-970-2019-006.pdf</a><br />
-</li>
-<li>Nextflow: Pipeline Lift | Illumina Connected Analytics, accessed
-November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><br />
-</li>
-<li>Illumina DRAGEN Bio-IT Platform v3.5 User Guide, accessed November
-26, 2025, <a href="https://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/dragen-bio-it/dragen-bio-it-platform-v3.5-user-guide-1000000111887-00.pdf">https://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/dragen-bio-it/dragen-bio-it-platform-v3.5-user-guide-1000000111887-00.pdf</a><br />
-</li>
-<li>Illumina DRAGEN™ Bio-IT Platform, accessed November 26, 2025, <a href="https://www.albiogen.ru/upload/documents/DRAGEN%20Overview%20Data%20Sheet.pdf">https://www.albiogen.ru/upload/documents/DRAGEN%20Overview%20Data%20Sheet.pdf</a><br />
-</li>
-<li>DRAGEN Complete Suite - AWS Marketplace, accessed November 26, 2025,
-<a href="https://aws.amazon.com/marketplace/pp/prodview-ypz2tpzy6f5xq">https://aws.amazon.com/marketplace/pp/prodview-ypz2tpzy6f5xq</a><br />
-</li>
-<li>Enabling Rapid Genomic and Multiomic Data Analysis with Illumina
-DRAGEN™ v4.4 on Amazon EC2 F2 Instances | AWS HPC Blog, accessed
-November 26, 2025, <a href="https://aws.amazon.com/blogs/hpc/enabling-rapid-genomic-and-multiomic-data-analysis-with-illumina-dragen-v4-4-on-amazon-ec2-f2-instances/">https://aws.amazon.com/blogs/hpc/enabling-rapid-genomic-and-multiomic-data-analysis-with-illumina-dragen-v4-4-on-amazon-ec2-f2-instances/</a><br />
-</li>
-<li>Nextflow | Illumina Connected Software, accessed November 26, 2025,
-<a href="https://help.connected.illumina.com/connected-analytics/project/p-flow/f-pipelines/pi-nextflow">https://help.connected.illumina.com/connected-analytics/project/p-flow/f-pipelines/pi-nextflow</a><br />
-</li>
-<li>Command-Line Options - DRAGEN - Illumina Support Center, accessed
-November 26, 2025, <a href="https://support-docs.illumina.com/SW/DRAGEN_v40/Content/SW/DRAGEN/OptionReference.htm">https://support-docs.illumina.com/SW/DRAGEN_v40/Content/SW/DRAGEN/OptionReference.htm</a><br />
-</li>
-<li>Variant Calling Only Examples - Illumina Support Center, accessed
-November 26, 2025, <a href="https://support-docs.illumina.com/SW/DRAGEN_v310/Content/SW/DRAGEN/VariantCallingOnlyExamples_fDG_dtREF.htm">https://support-docs.illumina.com/SW/DRAGEN_v310/Content/SW/DRAGEN/VariantCallingOnlyExamples_fDG_dtREF.htm</a><br />
-</li>
-<li>(How to) Run germline single sample short variant discovery in
-DRAGEN mode - GATK, accessed November 26, 2025, <a href="https://gatk.broadinstitute.org/hc/en-us/articles/4407897446939--How-to-Run-germline-single-sample-short-variant-discovery-in-DRAGEN-mode">https://gatk.broadinstitute.org/hc/en-us/articles/4407897446939–How-to-Run-germline-single-sample-short-variant-discovery-in-DRAGEN-mode</a><br />
-</li>
-<li>Variant Caller Options - Illumina Support Center, accessed November
-26, 2025, <a href="https://support-docs.illumina.com/SW/DRAGEN_v39/Content/SW/DRAGEN/VarCalOptions.htm">https://support-docs.illumina.com/SW/DRAGEN_v39/Content/SW/DRAGEN/VarCalOptions.htm</a><br />
-</li>
-<li>Command-line Options - Illumina Support, accessed November 26, 2025,
-<a href="https://support.illumina.com/content/dam/illumina-support/help/Illumina_DRAGEN_Bio_IT_Platform_v3_7_1000000141465/Content/SW/Informatics/Dragen/SoftwareCommLine_fDG.htm">https://support.illumina.com/content/dam/illumina-support/help/Illumina_DRAGEN_Bio_IT_Platform_v3_7_1000000141465/Content/SW/Informatics/Dragen/SoftwareCommLine_fDG.htm</a><br />
-</li>
-<li>seqeralabs/nf-dragen: POC Nextflow pipeline to run Illumina DRAGEN
-software - GitHub, accessed November 26, 2025, <a href="https://github.com/seqeralabs/nf-dragen">https://github.com/seqeralabs/nf-dragen</a><br />
-</li>
-<li>Illumina DRAGEN | Seqera Docs, accessed November 26, 2025, <a href="https://docs.seqera.io/platform-cloud/supported_software/dragen/overview">https://docs.seqera.io/platform-cloud/supported_software/dragen/overview</a><br />
-</li>
-<li>Introducing DRAGMAP, the new genome mapper in DRAGEN-GATK - Broad
-Institute, accessed November 26, 2025, <a href="https://gatk.broadinstitute.org/hc/en-us/articles/4410953761563-Introducing-DRAGMAP-the-new-genome-mapper-in-DRAGEN-GATK">https://gatk.broadinstitute.org/hc/en-us/articles/4410953761563-Introducing-DRAGMAP-the-new-genome-mapper-in-DRAGEN-GATK</a><br />
-</li>
-<li>Whole Genome Germline Single Sample Overview | WARP - Broad
-Institute, accessed November 26, 2025, <a href="https://broadinstitute.github.io/warp/docs/Pipelines/Whole_Genome_Germline_Single_Sample_Pipeline/README">https://broadinstitute.github.io/warp/docs/Pipelines/Whole_Genome_Germline_Single_Sample_Pipeline/README</a><br />
-</li>
-<li>Illumina/DRAGMAP: DRAGEN open-source mapper - GitHub, accessed
-November 26, 2025, <a href="https://github.com/Illumina/DRAGMAP">https://github.com/Illumina/DRAGMAP</a><br />
-</li>
-<li>Functional equivalence in DRAGEN-GATK, accessed November 26, 2025,
-<a href="https://gatk.broadinstitute.org/hc/en-us/articles/4410456501915-Functional-equivalence-in-DRAGEN-GATK">https://gatk.broadinstitute.org/hc/en-us/articles/4410456501915-Functional-equivalence-in-DRAGEN-GATK</a><br />
-</li>
-<li>You are a bioinformatics experts, write a article.pdf</li>
-</ol>
 </div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>DRAGEN™ secondary analysis - Illumina, accessed November
+26, 2025, <a href="https://www.illumina.com/content/dam/illumina/gcs/assembled-assets/marketing-literature/dragen-bio-it-data-sheet-m-gl-00680/dragen-bio-it-data-sheet-m-gl-00680.pdf">https://www.illumina.com/content/dam/illumina/gcs/assembled-assets/marketing-literature/dragen-bio-it-data-sheet-m-gl-00680/dragen-bio-it-data-sheet-m-gl-00680.pdf</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Illumina DRAGEN™ Bio-IT Platform, accessed November 26,
+2025, <a href="https://www.albiogen.ru/upload/documents/DRAGEN%20Overview%20Data%20Sheet.pdf">https://www.albiogen.ru/upload/documents/DRAGEN%20Overview%20Data%20Sheet.pdf</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>DRAGEN Complete Suite - AWS Marketplace, accessed
+November 26, 2025, <a href="https://aws.amazon.com/marketplace/pp/prodview-ypz2tpzy6f5xq">https://aws.amazon.com/marketplace/pp/prodview-ypz2tpzy6f5xq</a><a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Nextflow: Pipeline Lift | Illumina Connected Analytics,
+accessed November 26, 2025, <a href="https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers">https://help.ica.illumina.com/tutorials/nextflow/nextflow_pipeline_liftovers</a><a href="#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 </div>
 
