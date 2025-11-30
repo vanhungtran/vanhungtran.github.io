@@ -1,0 +1,523 @@
+
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Meta-Analysis of Atopic Dermatitis Therapies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Calm Harmony" - A mix of warm neutrals (amber/stone), a professional teal for accents, and a clear, accessible color set for charts. -->
+    <!-- Application Structure Plan: The SPA is a thematic dashboard. The data backend has been fully updated with the user-provided CSV files. The structure remains: 1) Landscape, 2) Topical Therapies, 3) Systemic Therapies (now with richer data), 4) Simplified Ranking (updated from NMA to reflect direct evidence from the new data), 5) Full Data Table (now comprehensive and including references), and 6) Future Directions. This structure supports a full analytical journey from overview to deep data inspection. -->
+    <!-- Visualization & Content Choices: 1) Systemic Chart -> Goal: Compare -> Viz: Grouped Bar Chart -> Data Source: "Jonathan 2022.csv". This is updated to reflect the broader range of therapies and their placebo-controlled results. 2) Simplified Ranking -> Goal: Compare/Organize -> Viz: Ranked HTML Table -> Justification: The original NMA data (SUCRA scores) was not in the new files. This has been transparently replaced with a direct ranking based on EASI-75 values from "Jonathan 2022.csv" to provide a clear, evidence-based hierarchy without overstating the analysis. 3) Full Data Table -> Viz: Sortable HTML Table -> Data Source: Combined data from all provided files, linking references from "Bawy_Alexandro_2023.csv" to outcomes from "Jonathan 2022.csv". This provides maximum transparency. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcf9;
+            color: #44403c;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link:hover {
+            color: #0d9488;
+        }
+        .active-nav {
+            color: #0d9488;
+            border-bottom-color: #0d9488;
+        }
+        .control-button {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .control-button-active {
+            background-color: #0d9488 !important;
+            color: white !important;
+            border-color: #0d9488 !important;
+        }
+        .nma-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nma-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(13, 148, 136, 0.5);
+            z-index: 10;
+        }
+        .nma-line {
+            position: absolute;
+            background-color: #9ca3af;
+            height: 2px;
+            transform-origin: left;
+            z-index: 1;
+        }
+        .highlight-row {
+            background-color: #f0fdfa !important;
+        }
+        .sortable-header {
+            cursor: pointer;
+        }
+        .sortable-header:hover {
+            background-color: #f5f5f4;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-stone-800">AD Therapy Explorer</span>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="#landscape" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Landscape</a>
+                        <a href="#topical" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Topical</a>
+                        <a href="#systemic" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Systemic</a>
+                        <a href="#network-analysis" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Ranking</a>
+                        <a href="#data-table" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Full Data</a>
+                        <a href="#future" class="nav-link text-stone-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Future</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="landscape" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-stone-900 tracking-tight">An Interactive Synthesis of Atopic Dermatitis Therapies</h1>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">This application provides an interactive visualization of the meta-analysis data on Atopic Dermatitis (AD) treatments. Explore the efficacy and safety of various therapies, compare outcomes, and understand the evolving landscape of AD management.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-4">Understanding the Treatment Pathway</h3>
+                    <p class="text-stone-600 mb-6">The management of Atopic Dermatitis follows a stepwise approach based on disease severity. This diagram illustrates the general pathway, starting with foundational topical therapies for milder cases and escalating to advanced systemic agents for moderate-to-severe disease that is not adequately controlled by topicals.</p>
+                     <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                            <p class="font-semibold text-teal-700">Mild AD</p>
+                            <p class="text-sm text-stone-600">Cornerstone: Emollients, Topical Corticosteroids (TCS), Topical Calcineurin Inhibitors (TCIs)</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <span class="text-2xl text-stone-400">↓</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                            <p class="font-semibold text-amber-700">Moderate-to-Severe AD</p>
+                            <p class="text-sm text-stone-600">Add-on: Phototherapy, Novel Topicals (PDE4i, JAKi)</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <span class="text-2xl text-stone-400">↓</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                            <p class="font-semibold text-red-700">Inadequate Control</p>
+                            <p class="text-sm text-stone-600">Systemic Therapies: Biologics (Anti-IL-4/13), Oral JAK Inhibitors</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-4">Key Outcome Measures in Clinical Trials</h3>
+                     <p class="text-stone-600 mb-6">To compare treatments effectively, clinical trials rely on a core set of standardized outcome measures. Click the tabs below to learn about the primary endpoints used to evaluate skin clearance and symptom improvement in the studies synthesized here.</p>
+                    <div class="bg-white rounded-lg border border-stone-200 shadow-sm">
+                        <div class="border-b border-stone-200">
+                            <nav id="outcome-tabs" class="-mb-px flex space-x-1 px-4" aria-label="Tabs">
+                                <button data-target="easi-content" class="outcome-tab control-button-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">EASI</button>
+                                <button data-target="iga-content" class="outcome-tab text-stone-500 hover:text-teal-600 hover:border-stone-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">IGA</button>
+                                <button data-target="ppnrs-content" class="outcome-tab text-stone-500 hover:text-teal-600 hover:border-stone-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">PP-NRS</button>
+                            </nav>
+                        </div>
+                        <div class="p-6">
+                            <div id="easi-content" class="outcome-content">
+                                <h4 class="font-semibold text-stone-800">Eczema Area and Severity Index (EASI)</h4>
+                                <p class="mt-2 text-sm text-stone-600">EASI is a clinician-rated score from 0-72 that measures the extent and severity of AD signs. A common endpoint is **EASI-75**, representing the percentage of patients who achieve at least a 75% improvement from their baseline score.</p>
+                            </div>
+                            <div id="iga-content" class="outcome-content hidden">
+                                <h4 class="font-semibold text-stone-800">Investigator's Global Assessment (IGA)</h4>
+                                <p class="mt-2 text-sm text-stone-600">IGA is a 5-point scale where a clinician provides an overall assessment of disease severity. The primary endpoint is typically the percentage of patients achieving a score of **0 (Clear) or 1 (Almost Clear)**.</p>
+                            </div>
+                            <div id="ppnrs-content" class="outcome-content hidden">
+                                <h4 class="font-semibold text-stone-800">Peak Pruritus Numerical Rating Scale (PP-NRS)</h4>
+                                <p class="mt-2 text-sm text-stone-600">This is a patient-reported scale from 0 to 10 measuring the worst itch intensity. A clinically meaningful improvement is defined as a **reduction of ≥4 points** from baseline.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="topical" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">Topical Therapy Comparator</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">Topical agents are the foundation of AD treatment. This section visualizes the performance of novel non-steroidal agents from pivotal trials compared to their vehicle (placebo).</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-lg">
+                 <p class="text-center text-stone-600 mb-6">The chart below displays the percentage of patients achieving an IGA score of 0 or 1 (Clear/Almost Clear).</p>
+                <div class="chart-container">
+                    <canvas id="topicalChart"></canvas>
+                </div>
+                <div id="topical-insights" class="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                    <p class="text-sm text-amber-800"><strong class="font-semibold">Key Insight:</strong> Among the novel topical agents, the JAK inhibitor Ruxolitinib demonstrated the highest efficacy in its pivotal trials, with over 50% of patients achieving the primary endpoint of IGA 0/1. This represents a significant improvement over both vehicle and the PDE4 inhibitors.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="systemic" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">Systemic Therapy Comparator Dashboard</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">For moderate-to-severe AD, systemic therapies offer profound improvements. This interactive dashboard allows you to compare pivotal trial data for advanced biologics and oral JAK inhibitors based on the latest comprehensive data.</p>
+            </div>
+
+            <div class="bg-white p-4 md:p-6 rounded-lg border border-stone-200 shadow-lg">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-6 p-4 bg-stone-50 rounded-md border border-stone-200">
+                    <div>
+                        <label for="endpoint-selector" class="block text-sm font-medium text-stone-700 mb-1">1. Select Efficacy Endpoint:</label>
+                        <select id="endpoint-selector" class="rounded-md border-stone-300 shadow-sm focus:border-teal-500 focus:ring-teal-500">
+                            <option value="iga" selected>IGA 0/1 Response</option>
+                            <option value="easi">EASI-75 Response</option>
+                            <option value="ppnrs">PP-NRS ≥4-point Improvement</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-4">
+                         <span class="text-sm font-medium text-stone-700">2. Filter by Class:</span>
+                         <div id="class-filter-buttons" class="flex items-center gap-2">
+                             <button data-class="Biologic" class="control-button control-button-active px-4 py-2 text-sm font-medium border border-stone-300 rounded-md bg-white text-stone-700 hover:bg-stone-100">Biologics</button>
+                             <button data-class="JAKi" class="control-button control-button-active px-4 py-2 text-sm font-medium border border-stone-300 rounded-md bg-white text-stone-700 hover:bg-stone-100">JAK Inhibitors</button>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="systemicChart"></canvas>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="systemic-insights" class="p-4 bg-amber-50 rounded-lg border border-amber-200">
+                        <h4 class="font-semibold text-amber-900 mb-2">Dynamic Insights</h4>
+                        <p id="insight-text" class="text-sm text-amber-800">Oral JAK inhibitors, particularly the higher doses of Upadacitinib and Abrocitinib, show the highest rates of achieving IGA 0/1. Biologics also show strong efficacy, with Lebrikizumab and Dupilumab performing well above placebo.</p>
+                    </div>
+                     <div id="safety-insights" class="p-4 bg-sky-50 rounded-lg border border-sky-200">
+                        <h4 class="font-semibold text-sky-900 mb-2">Class Safety Profile</h4>
+                        <p id="safety-text" class="text-sm text-sky-800"><strong class="font-semibold">Biologics:</strong> The most common adverse event is conjunctivitis. <strong class="font-semibold">JAK Inhibitors:</strong> Associated with higher rates of nausea, acne, and herpes zoster compared to placebo and require lab monitoring.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="network-analysis" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">Simplified Efficacy Ranking</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">While a full Bayesian network meta-analysis requires complex statistical modeling, we can rank therapies based on their direct trial evidence. The following table ranks therapies based on their reported EASI-75 response rates, providing a clear view of relative efficacy from the available head-to-head (vs. placebo) data.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-lg">
+                <div>
+                    <h3 class="text-xl font-semibold text-center text-stone-800 mb-4">Efficacy Ranking (EASI-75)</h3>
+                    <p class="text-sm text-stone-600 text-center mb-4">The table ranks systemic therapies by their reported EASI-75 response rate. A higher percentage indicates a better outcome in the respective pivotal trial.</p>
+                    <div class="overflow-x-auto max-w-4xl mx-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Rank</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Treatment</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">EASI-75 Response (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="nma-table-body" class="bg-white divide-y divide-stone-200">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="data-table" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">Full Data Table</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">For full transparency, the complete dataset synthesized from the provided files is below. Click on the column headers to sort the data and conduct your own exploration.</p>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg border border-stone-200 shadow-lg">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="treatment">Treatment <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="reference">Reference <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="type">Type <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="class">Class <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="iga">IGA 0/1 (%) <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="easi">EASI-75 (%) <span></span></th>
+                                <th scope="col" class="sortable-header px-4 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider" data-sort="ppnrs">PP-NRS ≥4pt (%) <span></span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-data-body" class="bg-white divide-y divide-stone-200">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-stone-200 my-16">
+
+        <section id="future" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">The Evolving Frontier</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">The field of atopic dermatitis is highly dynamic. Research continues to push boundaries, focusing on long-term outcomes, personalized medicine, and treating younger patient populations.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm">
+                    <h3 class="font-semibold text-lg text-stone-800">Long-Term & Real-World Data</h3>
+                    <p class="mt-2 text-stone-600">Ongoing research is focused on gathering data beyond pivotal trials. Long-term extension studies and real-world evidence are critical for understanding the durability of treatment responses and long-term safety profiles.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm">
+                    <h3 class="font-semibold text-lg text-stone-800">Personalized Medicine & Biomarkers</h3>
+                    <p class="mt-2 text-stone-600">The future lies in personalization. Researchers are actively searching for biomarkers that can predict which patients will respond best to a specific therapy, moving away from a "one-size-fits-all" approach.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm">
+                    <h3 class="font-semibold text-lg text-stone-800">Expansion into Pediatrics</h3>
+                    <p class="mt-2 text-stone-600">A key trend is the systematic testing and approval of therapies for younger children. Since AD often begins in early childhood, establishing safety and efficacy in these populations is a critical unmet need.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-100 border-t border-stone-200 mt-16">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-stone-500">
+            <p>Data synthesized from the "Comprehensive Data Synthesis for Meta-Analysis of Therapeutic Interventions in Atopic Dermatitis" report and user-provided files.</p>
+            <p>This interactive visualization is for informational purposes only and does not constitute medical advice.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const topicalRawData = {
+            'crisaborole': { label: 'Crisaborole 2%', reference: 'Paller AS, 2016', class: 'PDE4i', type: 'Topical', iga: 32.1, easi: null, ppnrs: null, placebo_iga: 21.7 },
+            'difamilast': { label: 'Difamilast 1%', reference: 'Saeki H, 2022', class: 'PDE4i', type: 'Topical', iga: 47.1, easi: null, ppnrs: null, placebo_iga: 18.1 },
+            'ruxolitinib': { label: 'Ruxolitinib 1.5%', reference: 'Papp K, 2021', class: 'JAKi', type: 'Topical', iga: 52.55, easi: null, ppnrs: null, placebo_iga: 11.35 },
+            'delgocitinib': { label: 'Delgocitinib 0.3%', reference: 'Nakagawa H, 2020', class: 'JAKi', type: 'Topical', iga: 26.4, easi: null, ppnrs: null, placebo_iga: 4.2 },
+        };
+
+        const systemicRawData = {
+            'abrocitinib-200': { label: 'Abrocitinib 200mg', reference: 'Simpson EL, 2020', class: 'JAKi', type: 'Systemic', iga: 43.8, easi: 62.7, ppnrs: 57.1, placebo_iga: 7.9, placebo_easi: 11.8, placebo_ppnrs: 15.3 },
+            'abrocitinib-100': { label: 'Abrocitinib 100mg', reference: 'Simpson EL, 2020', class: 'JAKi', type: 'Systemic', iga: 23.7, easi: 39.7, ppnrs: 37.4, placebo_iga: 7.9, placebo_easi: 11.8, placebo_ppnrs: 15.3 },
+            'upadacitinib-30': { label: 'Upadacitinib 30mg', reference: 'Reich K, 2021', class: 'JAKi', type: 'Systemic', iga: 60.0, easi: 70.0, ppnrs: 60.0, placebo_iga: 8.0, placebo_easi: 16.0, placebo_ppnrs: 12.0 },
+            'upadacitinib-15': { label: 'Upadacitinib 15mg', reference: 'Reich K, 2021', class: 'JAKi', type: 'Systemic', iga: 48.0, easi: 60.0, ppnrs: 52.0, placebo_iga: 8.0, placebo_easi: 16.0, placebo_ppnrs: 12.0 },
+            'baricitinib-4': { label: 'Baricitinib 4mg', reference: 'Simpson EL, 2021', class: 'JAKi', type: 'Systemic', iga: 16.8, easi: 24.8, ppnrs: 19.8, placebo_iga: 4.8, placebo_easi: 8.0, placebo_ppnrs: 5.4 },
+            'baricitinib-2': { label: 'Baricitinib 2mg', reference: 'Simpson EL, 2021', class: 'JAKi', type: 'Systemic', iga: 11.3, easi: 16.8, ppnrs: 13.9, placebo_iga: 4.8, placebo_easi: 8.0, placebo_ppnrs: 5.4 },
+            'dupilumab-300-solo': { label: 'Dupilumab 300mg Q2W (SOLO 1&2)', reference: 'Simpson EL, 2016', class: 'Biologic', type: 'Systemic', iga: 37.05, easi: 47.75, ppnrs: 40.55, placebo_iga: 9.55, placebo_easi: 12.35, placebo_ppnrs: 10.9 },
+            'tralokinumab-300': { label: 'Tralokinumab 300mg Q2W (ECZTRA 1)', reference: 'Wollenberg A, 2021', class: 'Biologic', type: 'Systemic', iga: 15.8, easi: 25.0, ppnrs: 20.0, placebo_iga: 7.1, placebo_easi: 12.6, placebo_ppnrs: 11.5 },
+            'lebrikizumab-250': { label: 'Lebrikizumab 250mg Q2W (ADhere)', reference: 'Chan G, 2020', class: 'Biologic', type: 'Systemic', iga: 38.2, easi: 55.5, ppnrs: 42.3, placebo_iga: 11.8, placebo_easi: 17.2, placebo_ppnrs: 12.2 }
+        };
+
+        const chartOptions = (title) => ({
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: title, font: { size: 16, weight: '600' }, color: '#44403c', padding: { top: 10, bottom: 20 } },
+                legend: { position: 'bottom', labels: { boxWidth: 20, padding: 20, color: '#57534e' } },
+                tooltip: { backgroundColor: '#ffffff', titleColor: '#44403c', bodyColor: '#57534e', borderColor: '#e7e5e4', borderWidth: 1, callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y}%` } }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Patient Response Rate (%)', color: '#78716c' }, grid: { color: '#f5f5f4' }, ticks: { color: '#78716c' } },
+                x: { grid: { display: false }, ticks: { color: '#78716c', callback: function(v) { const l = this.getLabelForValue(v); return l.length > 16 ? l.split(' ').map(w => w.length > 8 ? w.substring(0, 8) + '...' : w) : l; } } }
+            }
+        });
+
+        function renderTopicalChart() {
+            const topicalData = Object.values(topicalRawData);
+            const topicalCtx = document.getElementById('topicalChart').getContext('2d');
+            new Chart(topicalCtx, {
+                type: 'bar',
+                data: {
+                    labels: topicalData.map(d => d.label),
+                    datasets: [
+                        { label: 'Drug Response (%)', data: topicalData.map(d => d.iga), backgroundColor: '#0d9488', borderColor: '#047857', borderWidth: 1 },
+                        { label: 'Vehicle Response (%)', data: topicalData.map(d => d.placebo_iga), backgroundColor: '#a8a29e', borderColor: '#78716c', borderWidth: 1 }
+                    ]
+                },
+                options: chartOptions('IGA 0/1 Response for Novel Topical Agents')
+            });
+        }
+
+        let systemicChart;
+        function renderSystemicChart() {
+            const endpointSelector = document.getElementById('endpoint-selector');
+            const classFilterButtons = document.querySelectorAll('#class-filter-buttons button');
+            const insightText = document.getElementById('insight-text');
+            const systemicCtx = document.getElementById('systemicChart').getContext('2d');
+            let activeClasses = ['Biologic', 'JAKi'];
+
+            function updateSystemicChart() {
+                const selectedEndpoint = endpointSelector.value;
+                const filteredData = Object.values(systemicRawData).filter(d => activeClasses.includes(d.class));
+                filteredData.sort((a,b) => b[selectedEndpoint] - a[selectedEndpoint]);
+
+                const chartData = {
+                    labels: filteredData.map(d => d.label),
+                    datasets: [
+                        { label: 'Drug Response (%)', data: filteredData.map(d => d[selectedEndpoint]), backgroundColor: '#14b8a6', borderColor: '#0f766e', borderWidth: 1 },
+                        { label: 'Placebo Response (%)', data: filteredData.map(d => d[`placebo_${selectedEndpoint}`]), backgroundColor: '#d6d3d1', borderColor: '#a8a29e', borderWidth: 1 }
+                    ]
+                };
+
+                const endpointTitles = {iga: 'IGA 0/1 Response Rate', easi: 'EASI-75 Response Rate', ppnrs: 'PP-NRS ≥4-point Improvement Rate' };
+
+                if (systemicChart) {
+                    systemicChart.data = chartData;
+                    systemicChart.options.plugins.title.text = endpointTitles[selectedEndpoint];
+                    systemicChart.update();
+                } else {
+                    systemicChart = new Chart(systemicCtx, { type: 'bar', data: chartData, options: chartOptions(endpointTitles[selectedEndpoint]) });
+                }
+                updateInsightText(filteredData, selectedEndpoint);
+            }
+
+            function updateInsightText(data, endpoint) {
+                if (data.length === 0) { insightText.textContent = "No treatments selected."; return; }
+                const sortedData = [...data].sort((a, b) => b[endpoint] - a[endpoint]);
+                const topPerformer = sortedData[0];
+                const endpointText = { iga: 'in achieving clear or almost clear skin (IGA 0/1)', easi: 'in achieving significant skin clearance (EASI-75)', ppnrs: 'in providing clinically meaningful itch relief (PP-NRS ≥4pt)' };
+                let text = `When comparing treatments for ${endpointText[endpoint]}, **${topPerformer.label}** shows the highest response rate at **${topPerformer[endpoint]}%**. `;
+                insightText.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+            }
+
+            endpointSelector.addEventListener('change', updateSystemicChart);
+            classFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedClass = button.dataset.class;
+                    button.classList.toggle('control-button-active');
+                    activeClasses = activeClasses.includes(selectedClass) ? activeClasses.filter(c => c !== selectedClass) : [...activeClasses, selectedClass];
+                    updateSystemicChart();
+                });
+            });
+            updateSystemicChart();
+        }
+
+        function renderRankingTable() {
+            const tableBody = document.getElementById('nma-table-body');
+            tableBody.innerHTML = '';
+            const systemicDataWithEasi = Object.values(systemicRawData).filter(d => d.easi !== null && d.easi !== undefined);
+
+            systemicDataWithEasi.sort((a, b) => b.easi - a.easi);
+
+            systemicDataWithEasi.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${index + 1}</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.label}</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.easi}%</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function renderFullDataTable() {
+            const fullData = [...Object.values(topicalRawData), ...Object.values(systemicRawData)];
+            const tableBody = document.getElementById('full-data-body');
+            tableBody.innerHTML = '';
+            fullData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-stone-800">${item.label}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.reference}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.type}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.class}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.iga ?? 'N/A'}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.easi ?? 'N/A'}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.ppnrs ?? 'N/A'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function setupTableSorting() {
+            document.querySelectorAll('.sortable-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const tableBody = header.closest('table').querySelector('tbody');
+                    const column = header.dataset.sort;
+                    const isAsc = header.dataset.order === 'asc';
+                    const newOrder = isAsc ? 'desc' : 'asc';
+
+                    document.querySelectorAll('.sortable-header span').forEach(s => s.textContent = '');
+                    header.querySelector('span').textContent = newOrder === 'asc' ? ' ▲' : ' ▼';
+                    header.dataset.order = newOrder;
+
+                    Array.from(tableBody.querySelectorAll('tr'))
+                        .sort((a, b) => {
+                            let valA = a.children[header.cellIndex].textContent;
+                            let valB = b.children[header.cellIndex].textContent;
+                            if (valA === 'N/A') valA = -Infinity;
+                            if (valB === 'N/A') valB = -Infinity;
+                            const isNumeric = !isNaN(parseFloat(valA)) && isFinite(valA);
+
+                            if (isNumeric) {
+                                return (isAsc ? 1 : -1) * (parseFloat(valA) - parseFloat(valB));
+                            } else {
+                                return (isAsc ? 1 : -1) * valA.localeCompare(valB);
+                            }
+                        })
+                        .forEach(row => tableBody.appendChild(row));
+                });
+            });
+        }
+
+        function setupUI() {
+            const outcomeTabs = document.querySelectorAll('.outcome-tab');
+            const outcomeContents = document.querySelectorAll('.outcome-content');
+            outcomeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    outcomeTabs.forEach(t => t.classList.remove('control-button-active'));
+                    tab.classList.add('control-button-active');
+                    outcomeContents.forEach(c => c.id === tab.dataset.target ? c.classList.remove('hidden') : c.classList.add('hidden'));
+                });
+            });
+
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) link.classList.add('active-nav');
+                        });
+                    }
+                });
+            }, { root: null, rooptMargin: '0px', threshold: 0.4 });
+            sections.forEach(section => observer.observe(section));
+        }
+
+        renderTopicalChart();
+        renderSystemicChart();
+        renderRankingTable();
+        renderFullDataTable();
+        setupTableSorting();
+        setupUI();
+    });
+    </script>
+</body>
+</html>
+

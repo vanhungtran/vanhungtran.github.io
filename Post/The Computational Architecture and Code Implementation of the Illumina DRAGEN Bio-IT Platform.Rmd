@@ -7,8 +7,6 @@ output:
 ---
 
 
-# **The Computational Architecture and Code Implementation of the Illumina DRAGEN Bio-IT Platform**
-
 ## **1\. Introduction: The FPGA Paradigm in Genomic Computing**
 
 The exponential reduction in DNA sequencing costs has shifted the primary bottleneck in genomics from data generation to computational analysis. As high-throughput platforms like the NovaSeq X Series generate petabytes of data, traditional CPU-based pipelines (e.g., BWA-GATK) struggle to maintain acceptable turnaround times. The Illumina DRAGEN (Dynamic Read Analysis for GENomics) Bio-IT Platform addresses this by utilizing Field-Programmable Gate Array (FPGA) technology. By implementing genomic algorithms as hardware logic circuits rather than software instructions, DRAGEN achieves ultra-rapid secondary analysis—processing a 30x whole genome in approximately 25 minutes, a 10-15x acceleration over standard methods.
