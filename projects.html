@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Lucas VHH TRAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+        .display-font { font-family: 'Playfair Display', serif; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #4299e1, #38b2ac);
+            color: white;
+            transform: scale(1.05);
+        }
+        .tech-badge {
+            transition: all 0.2s ease;
+        }
+        .tech-badge:hover {
+            transform: scale(1.1);
+        }
+        .impact-metric {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(56, 178, 172, 0.1));
+            border-left: 4px solid #4299e1;
+        }
+        .modal {
+            backdrop-filter: blur(10px);
+        }
+        .floating-element {
+            animation: float 8s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .step-indicator {
+            background: linear-gradient(135deg, #4299e1, #38b2ac);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">📊</span>
+                    </div>
+                    <h1 class="display-font text-xl text-gray-800">Lucas VHH TRAN</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Portfolio</a>
+                    <a href="projects.html" class="text-blue-600 font-medium">Projects</a>
+                    <a href="blog.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Blog</a>
+                    <a href="CVLucasTRAN.pdf" target="_blank" class="text-gray-700 hover:text-blue-500 font-medium transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        CV
+                    </a>
+                </div>
+                <button class="md:hidden p-2 rounded-md text-gray-700 hover:bg-white/20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-12 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <img src="resources/hero-data-science.jpg" alt="Projects" class="w-full h-full object-cover">
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="floating-element absolute top-20 left-10 text-3xl opacity-60">🚀</div>
+            <div class="floating-element absolute top-32 right-20 text-2xl opacity-50" style="animation-delay: -2s;">💡</div>
+            <div class="floating-element absolute bottom-20 left-1/4 text-xl opacity-40" style="animation-delay: -4s;">🔬</div>
+            
+            <h2 class="display-font text-5xl md:text-6xl text-gray-800 mb-4">
+                <span class="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+                    Featured Projects
+                </span>
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Cutting-edge biostatistics, clinical research, and interactive applications in life sciences
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium active" data-filter="all">
+                All Projects
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="research">
+                Research & Bioinformatics
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="visualization">
+                Data Visualization
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="analytics">
+                Statistics & Books
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="machine-learning">
+                Machine Learning
+            </button>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+            
+            <!-- NEW: CyTOF Data Analysis Workflow -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="cytof-workflow">
+                <img src="https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g001.jpg" alt="CyTOF Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">CyTOF Data Analysis Workflow</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive bioinformatics workflow for mass cytometry (CyTOF) data analysis. Features automated cell population identification, differential abundance/state analysis, and advanced visualization using R/Bioconductor.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">CyTOF</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Bioconductor</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">FlowSOM</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Interactive Workflow</span>
+                        <a href="https://vanhungtran.github.io/CyTOFworkflow/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Interactive Dashboard 1: Feature Selection Studio -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="feature-selection-studio">
+                <img src="Post/FS.png" alt="Feature Selection Studio" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Feature Selection Studio</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive web application for comprehensive feature selection analysis with multiple algorithms including Random Forest, Boruta, RFE, and statistical tests.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Shiny</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">ML</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Live Application</span>
+                        <a href="https://vanhungtran.shinyapps.io/FSplus/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Interactive Dashboard 2: FDA Drug Approvals -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="fda-dashboard">
+                <img src="Post/FDAplus.png" alt="FDA Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">FDA Novel Drug Approvals Dashboard</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive dashboard analyzing ten years of FDA drug approval data (2015-2025) with filtering by therapeutic area, year, and company insights.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Drug Development</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Shiny</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Regulatory</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Live Dashboard</span>
+                        <a href="https://vanhungtran.shinyapps.io/shiapp/" target="_blank" class="text-lg font-bold text-green-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Interactive Dashboard 3: CI/CD Pipeline -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="cicd-pipeline">
+                <img src="Post/CICD.png" alt="CI/CD Pipeline" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">CI/CD Pipeline Implementation</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive CI/CD pipeline setup with automated testing, deployment, and monitoring for data science projects and web applications.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">DevOps</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">GitHub Actions</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Automation</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Live Implementation</span>
+                        <a href="https://vanhungtran.github.io/CICD/" target="_blank" class="text-lg font-bold text-orange-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R Packages -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="atcddd">
+                <img src="https://www.whocc.no/atc_ddd_index/graphics/whocc_logo.png" alt="ATC/DDD" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">atcddd: WHO ATC/DDD R Package</h3>
+                <p class="text-sm text-gray-600 mb-4">R package for retrieving, parsing and computing with the WHO Anatomical Therapeutic Chemical (ATC) Classification and Defined Daily Dose (DDD) Index — works offline after one download.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">WHO ATC/DDD</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Pharma</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://vanhungtran.github.io/atcddd/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mestools -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="mestools">
+                <img src="https://cran.r-project.org/logo/Rlogo.svg" alt="mestools" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">mestools: R Dev Utilities</h3>
+                <p class="text-sm text-gray-600 mb-4">Utility functions for R data manipulation, package development, deployment automation (GitHub/pkgdown), and developer QoL tools for efficient R workflow.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">pkgdown</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">DevOps</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/mestools" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- aucmat -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="aucmat">
+                <img src="https://cran.r-project.org/web/packages/pROC/vignettes/auc-compared.png" alt="aucmat ROC" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">aucmat: Matrix ROC Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Matrix-first ROC analysis for high-dimensional molecular biomarker data with DeLong/bootstrap inference, multiplicity adjustment, and rank-stability analysis.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">ROC Analysis</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Biomarkers</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Documentation</span>
+                        <a href="https://vanhungtran.github.io/aucmat/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cliomicplot -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="cliomicplot">
+                <img src="https://ggplot2.tidyverse.org/logo.png" alt="cliomicplot" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">cliomicplot: Clinical Omics Plots</h3>
+                <p class="text-sm text-gray-600 mb-4">Publication-ready visualizations for clinical and multi-omics data: forest plots, volcano plots, KM curves, waterfall/swimmer plots, heatmaps, and PCA with journal-specific themes.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">ggplot2</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Viz</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://vanhungtran.github.io/cliomicplot/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 9: NK Cell Research -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="nk-cell-research">
+                <img src="https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g001.jpg" alt="NK Cell Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">NK Cell Receptor Repertoire Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Published research on comprehensive phenotypic characterization of human NK cells, analyzing 338 surface molecules and identifying distinct signatures between CD56bright and CD56dim subsets.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Flow Cytometry</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Immunology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Citations</span>
+                        <span class="text-lg font-bold text-purple-600">22+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 10: Atopic Dermatitis CVD Research -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="ad-cvd-study">
+                <img src="https://onlinelibrary.wiley.com/cms/asset/ebfdf2d3-48f2-415f-860f-0293d73c2156/all16588-toc-0001-m.jpg" alt="Atopic Dermatitis CVD Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Atopic Dermatitis & Cardiovascular Disease Study</h3>
+                <p class="text-sm text-gray-600 mb-4">Published clinical research investigating the connection between atopic dermatitis and cardiovascular diseases, analyzing 677 AD patients and cardiometabolic protein biomarkers.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Clinical Research</span>
+                    <span class="tech-badge text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full">Proteomics</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Biomarkers</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Patients Analyzed</span>
+                        <span class="text-lg font-bold text-red-600">677</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-sm font-medium text-gray-700">Research Paper</span>
+                        <a href="https://onlinelibrary.wiley.com/doi/10.1111/all.16588" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 11: Aspergillus Antigen Predictive Study -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="aspergillus-study">
+                <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0006497118504183-fx1.jpg" alt="Aspergillus Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Invasive Aspergillosis Prediction in Hematology Patients</h3>
+                <p class="text-sm text-gray-600 mb-4">Developed predictive score for invasive aspergillosis in AML patients and stem cell transplant recipients using galactomannan biomarker analysis across 775 patients.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Clinical Research</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Biomarkers</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Hematology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Patients Studied</span>
+                        <span class="text-lg font-bold text-red-600">775</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 12: Percutaneous Drug Absorption Study -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="drug-absorption-study">
+                <img src="Post/exvivo.jpg" alt="Drug Absorption Research" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Percutaneous Drug Absorption Optimization</h3>
+                <p class="text-sm text-gray-600 mb-4">Comparative study of enrofloxacin absorption through pig skin using LMOG organogel vs. Pentravan cream, demonstrating 3.7x enhanced drug delivery efficiency.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Pharmaceutical Research</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Drug Delivery</span>
+                    <span class="tech-badge text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">HPLC Analysis</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Absorption Enhancement</span>
+                        <span class="text-lg font-bold text-green-600">3.7x</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-sm font-medium text-gray-700">Research Paper</span>
+                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378517315304191?via%3Dihub" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 13: Interactive Gene-Disease Network -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-network-viz">
+                <img src="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork_files/figure-html/unnamed-chunk-4-1.png" alt="Gene Network Visualization" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Interactive Gene-Disease Network Visualization</h3>
+                <p class="text-sm text-gray-600 mb-4">Developed interactive network visualization using R and visNetwork to explore gene-disease relationships with dynamic filtering, hover tooltips, and physics-based layout algorithms.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">visNetwork</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Interactive Viz</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Network Nodes</span>
+                        <span class="text-lg font-bold text-blue-600">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 14: Gene Drug Interaction Network -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="gene-drug-interaction">
+                <img src="Post/DGI_set1.png" alt="Gene Drug Interaction Network" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Gene Drug Interaction Network Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive network analysis visualizing gene-drug interactions with advanced graph algorithms and pathway enrichment analysis for drug discovery applications.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Network Analysis</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Drug Discovery</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Pharmacogenomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Network Complexity</span>
+                        <span class="text-lg font-bold text-purple-600">High</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cytometree -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="cytometree">
+                <img src="https://raw.githubusercontent.com/sistm/cytometree/master/vignettes/cytometree.png" alt="cytometree" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">cytometree: Automated Cytometry Gating</h3>
+                <p class="text-sm text-gray-600 mb-4">Automated cytometry gating and annotation using bimodal distribution hypothesis and binary tree construction with AIC-based splitting algorithms.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Cytometry</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">FlowSOM</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">CRAN Package</span>
+                        <a href="https://github.com/vanhungtran/cytometree" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- repurp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="repurp">
+                <img src="Post/DGI_set1.png" alt="Drug Repurposing" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">repurp: Drug Repurposing Networks</h3>
+                <p class="text-sm text-gray-600 mb-4">R package for building, analyzing, and visualizing drug–gene/biomarker interaction networks with 15 visualization backends and curated AD drug reference data.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Network Analysis</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Drug Discovery</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/repurp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- survivalApp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="survivalApp">
+                <img src="https://shiny.rstudio.com/images/shiny-solo.png" alt="survivalApp" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">survivalApp: Survival Analysis Shiny</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive Shiny application for medical survival analysis: Kaplan-Meier curves, Cox proportional hazards, diagnostics, forest plots, and publication-ready exports.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Shiny</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Survival Analysis</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Stats</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/survivalApp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="genomic-dashboard">
+                <img src="Post/AD_Pso.png" alt="Genomic Analysis Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Atopic Dermatitis & Psoriasis: Genomic Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive genomic analysis dashboard exploring molecular overlaps between AD and Psoriasis using GEO datasets with Chart.js visualizations.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Genomics</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Chart.js</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Interactive</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">View Dashboard</span>
+                        <a href="genomic-dashboard.html" target="_blank" class="text-lg font-bold text-red-600 hover:underline">Launch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WGCNAApp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="wgcna-app">
+                <img src="https://shiny.rstudio.com/images/shiny-solo.png" alt="WGCNAApp" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">WGCNAApp: Gene Co-expression Network</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive Shiny app for weighted gene co-expression network analysis (WGCNA) with DESeq2 normalization, QC plots, and GO/KEGG enrichment analysis.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Shiny</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">WGCNA</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Transcriptomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/WGCNAApp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDPKwithR -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="pdpk-book">
+                <img src="https://quarto.org/quarto.png" alt="PKPD Book" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">PDPKwithR: PK/PD Modeling Book</h3>
+                <p class="text-sm text-gray-600 mb-4">21-chapter Quarto book "Master Pharmacokinetics and Pharmacodynamics with R" covering classical PK, PD dose-response, PK/PD linkage, and population modeling.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Quarto</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">PK/PD</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Online Book</span>
+                        <a href="https://vanhungtran.github.io/PDPKwithR/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RforMS -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="rforms-book">
+                <img src="https://quarto.org/quarto.png" alt="Mass Spec Book" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">RforMS: Mass Spectrometry with R</h3>
+                <p class="text-sm text-gray-600 mb-4">26-chapter Quarto book covering the full proteomics/metabolomics workflow from raw data import to biomarker modeling with Bioconductor.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Bioconductor</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Proteomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Online Book</span>
+                        <a href="https://vanhungtran.github.io/RforMS/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 18: Shrinkage Estimation -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="shrinkage-estimation">
+                <img src="Post/shrinkage_Estimators.png" alt="Shrinkage Estimation" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Shrinkage Estimation Methods</h3>
+                <p class="text-sm text-gray-600 mb-4">Advanced statistical analysis exploring shrinkage estimation techniques for improved parameter estimation in high-dimensional settings with applications in biostatistics and machine learning.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Statistics</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Bayesian Methods</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Interactive Demo</span>
+                        <a href="https://vanhungtran.github.io/ShrinkageEstimation" target="_blank" class="text-lg font-bold text-purple-600 hover:underline">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Atopic-Dermatitis-Meta-Transcriptomic -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="ad-meta-transcriptomic">
+                <img src="Post/AD_Pso.png" alt="AD Meta-Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">AD Meta-Transcriptomic Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Cross-platform meta-analysis of the atopic dermatitis transcriptomic disease signature across 39 datasets (2,138 individuals), with causal inference, drug repurposing, and biomarker analyses.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Meta-analysis</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Transcriptomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">39 Datasets | 2,138 Samples</span>
+                        <a href="https://github.com/vanhungtran/Atopic-Dermatitis-Meta-Transcriptomic" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- latent_pathR -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="latent-pathr">
+                <img src="https://bioconductor.org/images/logo_bioconductor.gif" alt="Latent Pathway" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">latent_pathR: Pathway Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Toolkit for latent pathway analysis of longitudinal transcriptomic data via GSVA, k-means clustering, Markov transition modeling, ridge regression, and optimal transport.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">GSVA</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Longitudinal</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/latent_pathR" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- rcreg -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="rcreg">
+                <img src="https://cran.r-project.org/logo/Rlogo.svg" alt="rcreg" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">rcreg: Random Coefficient Models</h3>
+                <p class="text-sm text-gray-600 mb-4">R package providing a high-level interface for fitting random coefficient regression models (random intercept/slope LMMs) for repeated measurement data, built on lme4.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Mixed Models</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Longitudinal</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/rcreg" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- coverage -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="coverage-ci">
+                <img src="https://cran.r-project.org/logo/Rlogo.svg" alt="coverage" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">coverage: CI for Binomial Proportions</h3>
+                <p class="text-sm text-gray-600 mb-4">Compute and visualize coverage probabilities for the difference between two binomial proportions with 11 confidence interval methods implemented.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Statistics</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">CI Methods</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/coverage" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- nCorona2019 -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="ncov-modeling">
+                <img src="https://raw.githubusercontent.com/vanhungtran/nCorona2019/master/animation.gif" alt="COVID-19 Model" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">nCorona2019: COVID-19 Modeling</h3>
+                <p class="text-sm text-gray-600 mb-4">R code for modeling Novel Coronavirus (COVID-19) confirmed cases with animated visualizations using gganimate.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">gganimate</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Epidemiology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/nCorona2019" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- airflow-data-pipeline -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="airflow-pipeline">
+                <img src="https://airflow.apache.org/images/feature-image.png" alt="Airflow Pipeline" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Airflow Medical Data Pipeline</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive Apache Airflow data pipeline with web dashboard, offline execution, and SecuTrial-integrated medical data processing for clinical data workflows.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Apache Airflow</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Data</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/airflow-data-pipeline" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- geo_epidemiology -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="geo-epidemiology">
+                <img src="https://raw.githubusercontent.com/vanhungtran/geo_epidemiology/master/vietnam_cpi_map.png" alt="Geo Epidemiology" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Geo-Epidemiology Mapping</h3>
+                <p class="text-sm text-gray-600 mb-4">Geo-epidemiology example: Vietnam Provincial Competitiveness Index (CPI) 2018 choropleth visualization with tidyverse and maptools.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">GIS</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Epidemiology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/geo_epidemiology" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My-work -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="mywork-ml">
+                <img src="https://jupyter.org/assets/homepage/main-logo.svg" alt="ML Notebooks" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">My-work: ML/AI Notebooks</h3>
+                <p class="text-sm text-gray-600 mb-4">Collection of ML/AI Jupyter notebooks: pneumonia X-ray detection, heart disease prediction, ECG analysis, Bayesian regression, and Python/R tutorials.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Jupyter</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/My-work" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- opendata -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="opendata">
+                <img src="https://raw.githubusercontent.com/vanhungtran/opendata/main/datasets.png" alt="Open Data" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">opendata: Dataset Collection</h3>
+                <p class="text-sm text-gray-600 mb-4">Curated collection of open datasets: NYC Airbnb, Olink assays, diabetes, heart disease, DRUGBANK drug-gene interactions, epidemiology linelist, and more.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Open Data</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">CSV/R/Excel</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Education</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/opendata" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Visualization -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h3 class="display-font text-3xl text-gray-800 text-center mb-8">Technology Stack</h3>
+        <div class="glass-effect rounded-3xl p-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">�</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">R</h4>
+                    <p class="text-sm text-gray-600">Primary language</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🐍</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Python</h4>
+                    <p class="text-sm text-gray-600">ML & pipelines</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🧬</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Bioconductor</h4>
+                    <p class="text-sm text-gray-600">Genomics</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Shiny</h4>
+                    <p class="text-sm text-gray-600">Interactive apps</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">📦</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">R Packages</h4>
+                    <p class="text-sm text-gray-600">10+ packages</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">📖</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Quarto/Rmd</h4>
+                    <p class="text-sm text-gray-600">Books & reports</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🧠</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">ML/DL</h4>
+                    <p class="text-sm text-gray-600">Keras, sklearn</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🌐</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Web Dev</h4>
+                    <p class="text-sm text-gray-600">HTML, Tailwind</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-75 modal hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 id="modalTitle" class="text-3xl font-bold text-gray-800 mb-2"></h3>
+                        <p id="modalCategory" class="text-blue-600 font-medium"></p>
+                    </div>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 text-3xl">×</button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <img id="modalImage" src="" alt="" class="w-full rounded-xl mb-4">
+                        <div id="modalTechStack" class="flex flex-wrap gap-2 mb-4"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-3">Project Overview</h4>
+                        <p id="modalDescription" class="text-gray-600 mb-6"></p>
+                        
+                        <h4 class="font-semibold text-gray-800 mb-3">Key Results</h4>
+                        <div id="modalResults" class="space-y-3"></div>
+                    </div>
+                </div>
+
+                <div class="border-t pt-6">
+                    <h4 class="font-semibold text-gray-800 mb-4">Methodology & Approach</h4>
+                    <div id="modalMethodology" class="space-y-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-effect mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold">📊</span>
+                </div>
+                <h4 class="display-font text-xl text-gray-800">Lucas VHH TRAN</h4>
+            </div>
+            <p class="text-gray-600 text-sm">© 2025 Lucas VHH TRAN. Transforming data into insights, one analysis at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Projects page functionality
+        class ProjectsPage {
+            constructor() {
+                this.currentFilter = 'all';
+                this.projects = this.initializeProjects();
+                this.init();
+            }
+
+            init() {
+                this.setupFilters();
+                this.setupProjectCards();
+                this.setupModal();
+                this.animateElements();
+            }
+
+            initializeProjects() {
+                return {
+                    'churn-prediction': {
+                        title: 'Customer Churn Prediction',
+                        category: 'Machine Learning',
+                        description: 'Developed a sophisticated machine learning model to predict customer churn with 89% accuracy. The system analyzes customer behavior patterns, usage data, and demographic information to identify at-risk customers before they churn.',
+                        image: 'https://kimi-web-img.moonshot.cn/img/www.salesforceben.com/f03e871f7ff9b375d939d991e66ecc1b6c2971ef.png',
+                        techStack: ['Python', 'Scikit-learn', 'Random Forest', 'XGBoost', 'Pandas'],
+                        results: [
+                            { metric: 'Model Accuracy', value: '89%', icon: '🎯' },
+                            { metric: 'Churn Reduction', value: '25%', icon: '📉' },
+                            { metric: 'Revenue Saved', value: '$1.2M', icon: '💰' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Data Collection & Preprocessing',
+                                description: 'Gathered customer data from multiple sources including transaction history, usage patterns, and demographic information. Applied data cleaning and feature engineering techniques.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Feature Engineering',
+                                description: 'Created meaningful features such as customer lifetime value, usage frequency, and engagement scores. Applied dimensionality reduction techniques to handle high-dimensional data.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Model Development',
+                                description: 'Tested multiple algorithms including Random Forest, XGBoost, and Neural Networks. Used cross-validation and hyperparameter tuning to optimize model performance.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Deployment & Monitoring',
+                                description: 'Deployed the model as a REST API with real-time prediction capabilities. Implemented monitoring systems to track model performance and retrain when necessary.'
+                            }
+                        ]
+                    },
+                    'sales-dashboard': {
+                        title: 'Interactive Sales Analytics Dashboard',
+                        category: 'Data Visualization',
+                        description: 'Created a comprehensive Tableau dashboard providing real-time sales insights and forecasting capabilities. The dashboard enables executives to make data-driven decisions quickly and effectively.',
+                        image: 'https://kimi-web-img.moonshot.cn/img/public.tableau.com/e669bf40111a3e83080740c82af49eee0fad88b9.png',
+                        techStack: ['Tableau', 'SQL', 'Data Modeling', 'ETL', 'AWS'],
+                        results: [
+                            { metric: 'Decision Speed', value: '60% Faster', icon: '⚡' },
+                            { metric: 'Data Accessibility', value: '100%', icon: '📊' },
+                            { metric: 'User Adoption', value: '95%', icon: '👥' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Requirements Analysis',
+                                description: 'Conducted stakeholder interviews to understand business requirements and key performance indicators. Defined user personas and use cases.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Data Architecture Design',
+                                description: 'Designed a scalable data architecture using cloud services. Implemented ETL processes to ensure data quality and consistency.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Dashboard Development',
+                                description: 'Created interactive visualizations with drill-down capabilities. Implemented real-time data updates and automated reporting features.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Training & Deployment',
+                                description: 'Provided comprehensive training to end users and established governance processes. Monitored usage patterns and gathered feedback for continuous improvement.'
+                            }
+                        ]
+                    },
+                    'market-basket': {
+                        title: 'Market Basket Analysis',
+                        category: 'Data Analytics',
+                        description: 'Applied association rule mining to identify product relationships and purchasing patterns. The analysis revealed valuable insights for cross-selling and upselling strategies.',
+                        image: 'https://kimi-web-img.moonshot.cn/img/assets.qlik.com/3018a0ad0c442e53fe13100e7af370e8f2862f90.png',
+                        techStack: ['R', 'Apriori', 'Association Rules', 'Data Mining', 'Statistical Analysis'],
+                        results: [
+                            { metric: 'Revenue Increase', value: '30%', icon: '📈' },
+                            { metric: 'Cross-sell Rate', value: '45% Higher', icon: '🛒' },
+                            { metric: 'Customer Insights', value: '150+ Rules', icon: '💡' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Transaction Data Analysis',
+                                description: 'Analyzed transaction data to understand purchasing patterns and product combinations. Identified high-frequency itemsets and association rules.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Algorithm Implementation',
+                                description: 'Implemented the Apriori algorithm to discover frequent itemsets and generate association rules with appropriate support and confidence thresholds.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Rule Validation',
+                                description: 'Validated discovered rules using statistical significance testing and business domain knowledge. Filtered out spurious correlations.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Recommendation System',
+                                description: 'Developed a real-time recommendation engine based on the discovered rules. Implemented A/B testing to measure the impact on sales.'
+                            }
+                        ]
+                    },
+                    'nk-cell-research': {
+                        title: 'NK Cell Receptor Repertoire Analysis',
+                        category: 'Research Publication',
+                        description: 'Published peer-reviewed research in Frontiers in Immunology analyzing the phenotypic diversity of human Natural Killer (NK) cells. This comprehensive study characterized 338 surface molecules on NK cells using flow cytometry, revealing distinct receptor signatures between CD56bright and CD56dim NK cell subsets and identifying inter-individual variability that may contribute to differential immune responses.',
+                        image: 'https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g001.jpg',
+                        techStack: ['Flow Cytometry', 'R', 'Statistical Analysis', 'Immunology', 'Data Visualization', 'Hierarchical Clustering'],
+                        results: [
+                            { metric: 'Surface Molecules Analyzed', value: '338', icon: '🔬' },
+                            { metric: 'Study Participants', value: '18', icon: '👥' },
+                            { metric: 'Differentially Expressed Receptors', value: '70', icon: '📊' },
+                            { metric: 'Journal Impact Factor', value: '7.3', icon: '📈' },
+                            { metric: 'Citations', value: '22+', icon: '📚' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Sample Collection & NK Cell Enrichment',
+                                description: 'Collected peripheral blood samples from 18 healthy donors. Enriched primary NK cells using immunomagnetic negative selection and cultured overnight with low-dose IL-15 and IL-2 to maintain viability and function.'
+                            },
+                            {
+                                step: 2,
+                                title: 'High-Throughput Flow Cytometry Analysis',
+                                description: 'Performed comprehensive phenotypic characterization using flow cytometry to assess expression of 338 individual surface molecules. Implemented multiplexing strategy to analyze samples from multiple donors simultaneously while maintaining sample identification.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Statistical Analysis & Data Mining',
+                                description: 'Applied advanced statistical methods including hierarchical clustering, principal component analysis, and Wilcoxon signed rank tests with FDR adjustment. Identified 146 surface molecules expressed on NK cells with 136 showing inter-donor variability.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Subset Characterization & Validation',
+                                description: 'Discovered 70 molecules with statistically significant differential expression between CD56bright and CD56dim NK cell subsets. Validated findings through unsupervised hierarchical clustering which successfully discriminated the two major NK cell populations.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Functional Annotation & Publication',
+                                description: 'Categorized differentially expressed molecules into functional groups (adhesion, NK-cell receptors, cytokine/chemokine receptors, etc.). Published findings in Frontiers in Immunology, contributing to understanding of NK cell phenotypic diversity and functional implications.'
+                            }
+                        ]
+                    },
+                    'ad-cvd-study': {
+                        title: 'Atopic Dermatitis & Cardiovascular Disease Study',
+                        category: 'Clinical Research Publication',
+                        description: 'Published comprehensive clinical research in Allergy (Wiley) investigating the complex relationship between atopic dermatitis (AD) and cardiovascular diseases (CVD). This multicenter observational study analyzed 677 AD patients and 79 controls from the ProRaD study, utilizing targeted proteomics and clinical assessments to explore cardiovascular risk factors and identify potential biomarkers in atopic dermatitis patients.',
+                        image: 'https://onlinelibrary.wiley.com/cms/asset/ebfdf2d3-48f2-415f-860f-0293d73c2156/all16588-toc-0001-m.jpg',
+                        techStack: ['Clinical Research', 'Proteomics', 'Olink Platform', 'Statistical Analysis', 'Biomarker Discovery', 'Epidemiology'],
+                        results: [
+                            { metric: 'AD Patients Studied', value: '677', icon: '👥' },
+                            { metric: 'Control Subjects', value: '79', icon: '🔬' },
+                            { metric: 'Cardiometabolic Proteins', value: '40+', icon: '🧬' },
+                            { metric: 'Journal Impact Factor', value: '13.3', icon: '📈' },
+                            { metric: 'Study Centers', value: 'Multi-center', icon: '🏥' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Patient Recruitment & Clinical Assessment',
+                                description: 'Recruited 677 atopic dermatitis patients and 79 non-atopic controls from the ProRaD multicenter observational study. Conducted comprehensive clinical assessments including AD severity scoring (EASI), cardiovascular risk evaluation, and documentation of atopic comorbidities.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Targeted Proteomics Analysis',
+                                description: 'Performed targeted proteomics analysis using the Olink cardiometabolics panel to quantify circulating protein biomarkers. Analyzed serum samples to identify proteins associated with both atopic dermatitis and cardiovascular disease pathways.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Statistical Modeling & Risk Assessment',
+                                description: 'Applied advanced statistical methods including logistic regression, adjusted odds ratios, and correlation analyses. Controlled for cardiovascular risk factors and stratified analyses by atopic comorbidity status to identify pure AD vs. AD with atopic comorbidities.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Biomarker Discovery & Validation',
+                                description: 'Identified 40 upregulated cardiometabolic proteins in AD patients compared to controls. Discovered CCL18 (CC-chemokine ligand 18) as a potential biomarker associated with both AD severity and CVD risk, with correlation to EASI scores.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Clinical Translation & Publication',
+                                description: 'Demonstrated that disease severity (EASI score) is an independent predictor of CVD in pure AD patients without atopic comorbidities. Published findings in Allergy journal, contributing to understanding of AD-CVD relationships and potential personalized risk stratification approaches.'
+                            }
+                        ]
+                    },
+                    'aspergillus-study': {
+                        title: 'Invasive Aspergillosis Prediction in Hematology Patients',
+                        category: 'Clinical Research Publication',
+                        description: 'Developed and validated a predictive scoring system for invasive aspergillosis (IA) in immunocompromised patients with acute myeloid leukemia (AML) receiving chemotherapy and patients undergoing allogeneic hematopoietic stem cell transplantation. This comprehensive study analyzed galactomannan (GM) biomarker patterns in 775 patients over 8 years, creating a practical clinical tool to guide preemptive antifungal therapy decisions.',
+                        image: 'https://ars.els-cdn.com/content/image/1-s2.0-S0006497118504183-fx1.jpg',
+                        techStack: ['Clinical Research', 'Biomarker Analysis', 'ELISA', 'ROC Analysis', 'Statistical Modeling', 'Predictive Scoring'],
+                        results: [
+                            { metric: 'Total Patients', value: '775', icon: '👥' },
+                            { metric: 'GM Tests Performed', value: '16,121', icon: '🔬' },
+                            { metric: 'IA Cases Identified', value: '48', icon: '📊' },
+                            { metric: 'Predictive Accuracy (AUC)', value: '0.79', icon: '📈' },
+                            { metric: 'Negative Predictive Value', value: '99%', icon: '✅' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Patient Cohort Assembly',
+                                description: 'Enrolled 775 high-risk patients: 292 AML patients receiving induction chemotherapy and 483 patients undergoing allogeneic HSCT for various hematological malignancies. Collected clinical data including demographics, disease characteristics, and risk factors over an 8-year period (2006-2014).'
+                            },
+                            {
+                                step: 2,
+                                title: 'Galactomannan Biomarker Surveillance',
+                                description: 'Performed systematic GM antigen testing using ELISA (Platelia Aspergillus antigen, Biorad) with bi-weekly sampling for 100 days post-treatment initiation. Collected 16,121 GM test results across 877 episodes, with median 18 tests per patient for comprehensive monitoring.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Invasive Aspergillosis Diagnosis & Classification',
+                                description: 'Diagnosed 48 IA cases (2 proven, 46 probable) according to EORTC criteria, achieving 5.5% cumulative incidence at day 100. Distinguished between true-positive (32%) and false-positive (68%) GM results through clinical correlation and imaging studies.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Predictive Model Development',
+                                description: 'Analyzed three key predictors: first GM index value (≥1.04), time to GM positivity (≤15 days), and slope of GM progression (≥0.04). Applied ROC curve analysis and logistic regression to develop predictive model with AUC of 0.79 (95% CI: 0.70-0.89).'
+                            },
+                            {
+                                step: 5,
+                                title: 'Clinical Scoring System Implementation',
+                                description: 'Created practical scoring system (0-3 points) based on number of predictors present. Score ≥2 indicated IA risk in 62% of cases, providing clinicians with actionable tool for early preemptive antifungal therapy initiation and improved patient outcomes.'
+                            }
+                        ]
+                    },
+                    'drug-absorption-study': {
+                        title: 'Percutaneous Drug Absorption Optimization',
+                        category: 'Pharmaceutical Research Publication',
+                        description: 'Conducted comprehensive ex-vivo comparative study investigating percutaneous absorption of enrofloxacin using two different topical formulations: LMOG organogel and Pentravan cream. Utilized Franz diffusion cells and pig ear skin models to demonstrate significant enhancement in drug delivery efficiency, with organogel formulation achieving 3.7-fold greater absorption than commercial cream over 120 hours.',
+                        image: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4765686/bin/molecules-21-00207-g001.jpg',
+                        techStack: ['Pharmaceutical Sciences', 'HPLC Analysis', 'Franz Diffusion Cells', 'Ex-vivo Models', 'Drug Delivery', 'Formulation Development'],
+                        results: [
+                            { metric: 'Absorption Enhancement', value: '3.7x', icon: '📈' },
+                            { metric: 'LMOG Organogel Flux', value: '1.22 μg/cm²/h', icon: '🧪' },
+                            { metric: 'Pentravan Flux', value: '0.35 μg/cm²/h', icon: '📊' },
+                            { metric: 'LMOG Absorption Rate', value: '29.3%', icon: '⚡' },
+                            { metric: 'Therapeutic Time Reduction', value: '50%', icon: '⏱️' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Formulation Preparation & Characterization',
+                                description: 'Prepared two 5% w/w enrofloxacin formulations: LMOG organogel using 12-hydroxystearic acid as gelling agent and commercial Pentravan cream. Characterized formulations for drug content uniformity, pH, and physicochemical properties to ensure comparable drug loading.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Ex-vivo Skin Model Setup',
+                                description: 'Utilized pig ear skin as validated human skin surrogate for percutaneous absorption studies. Prepared skin samples with consistent thickness and integrity, mounted in Franz diffusion cells with phosphate-buffered saline as receptor medium maintained at physiological conditions.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Percutaneous Absorption Monitoring',
+                                description: 'Conducted 120-hour permeation study with systematic sampling at predetermined intervals. Applied formulations to skin surface and monitored drug passage through skin barrier into receptor compartment, ensuring sink conditions throughout study duration.'
+                            },
+                            {
+                                step: 4,
+                                title: 'HPLC Quantitative Analysis',
+                                description: 'Developed and validated HPLC method for enrofloxacin quantification in receptor samples. Achieved excellent analytical performance with appropriate precision, accuracy, and detection limits for reliable pharmacokinetic parameter determination.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Pharmacokinetic Evaluation & Clinical Translation',
+                                description: 'Calculated key parameters: flux rates, lag times, and cumulative absorption. LMOG organogel demonstrated superior performance with 0.015h lag time vs. 6.32h for Pentravan, reaching therapeutic concentrations (2 μg/mL) in 30h vs. 60h, supporting enhanced clinical efficacy potential.'
+                            }
+                        ]
+                    },
+                    'gene-network-viz': {
+                        title: 'Interactive Gene-Disease Network Visualization',
+                        category: 'Data Visualization & Bioinformatics',
+                        description: 'Developed comprehensive interactive network visualization system using R and visNetwork to explore complex gene-disease relationships. Features dynamic node filtering, hover tooltips, physics-based layout algorithms, and real-time interaction capabilities. Demonstrates advanced data visualization techniques for biological network analysis with practical applications in genomics research and clinical decision support.',
+                        image: 'https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork_files/figure-html/unnamed-chunk-4-1.png',
+                        techStack: ['R Programming', 'visNetwork', 'JavaScript', 'HTML5', 'CSS3', 'D3.js', 'Network Analysis', 'Bioinformatics'],
+                        results: [
+                            { metric: 'Interactive Nodes', value: '8', icon: '🔵' },
+                            { metric: 'Network Edges', value: '7', icon: '🔗' },
+                            { metric: 'Filter Categories', value: '2', icon: '🎛️' },
+                            { metric: 'Physics Algorithms', value: '1', icon: '⚡' },
+                            { metric: 'User Interactions', value: '5+', icon: '🖱️' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Data Structure Design & Network Modeling',
+                                description: 'Designed comprehensive data framework with nodes representing genes (BRCA1, BRCA2, TP53, EGFR) and diseases (Breast Cancer, Ovarian Cancer, Li-Fraumeni, Lung Cancer). Implemented edge relationships to represent gene-disease associations with proper data typing and validation for network integrity.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Interactive Visualization Development',
+                                description: 'Utilized R visNetwork library to create dynamic network visualization with custom node shapes (diamonds for genes, dots for diseases), color-coded groups, and hover tooltips. Implemented dropdown menus for node selection and group-based filtering with real-time network updates.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Physics Engine & Layout Optimization',
+                                description: 'Integrated forceAtlas2Based physics solver for automatic node positioning and edge organization. Configured attraction/repulsion forces to prevent node overlap while maintaining visual clarity and intuitive spatial relationships between connected elements.'
+                            },
+                            {
+                                step: 4,
+                                title: 'User Experience & Interaction Design',
+                                description: 'Implemented comprehensive interaction features including drag-and-drop node positioning, zoom controls, pan navigation, and highlight-on-hover functionality. Added navigation buttons and keyboard shortcuts for enhanced user experience and accessibility.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Code Integration & Documentation',
+                                description: 'Created full self-contained R script with modular structure, comprehensive commenting, and package dependency management. Provided complete implementation guide with installation instructions and customization options for research applications and clinical use cases.'
+                            }
+                        ],
+                        codeSnippet: `# Interactive Gene-Disease Network in R
+library(visNetwork)
+library(dplyr)
+
+# Define nodes (genes and diseases)
+nodes <- data.frame(
+  id = 1:8,
+  label = c("BRCA1", "BRCA2", "TP53", "EGFR", 
+           "Breast Cancer", "Ovarian Cancer", "Li-Fraumeni", "Lung Cancer"),
+  group = c(rep("Gene", 4), rep("Disease", 4)),
+  shape = c(rep("diamond", 4), rep("dot", 4))
+)
+
+# Define edges (gene-disease associations)
+edges <- data.frame(
+  from = c(1, 1, 2, 2, 3, 3, 4),
+  to = c(5, 6, 5, 6, 5, 7, 8),
+  label = rep("Associated with", 7),
+  arrows = "to"
+)
+
+# Create interactive network
+visNetwork(nodes, edges, height = "600px") %>%
+  visGroups(groupname = "Gene", 
+           color = list(background = "#85c1e9", border = "#3498db")) %>%
+  visGroups(groupname = "Disease", 
+           color = list(background = "#f7dc6f", border = "#f1c40f")) %>%
+  visOptions(highlightNearest = TRUE, 
+            nodesIdSelection = TRUE,
+            selectedBy = "group") %>%
+  visInteraction(navigationButtons = TRUE,
+                dragNodes = TRUE,
+                zoomView = TRUE) %>%
+  visPhysics(solver = "forceAtlas2Based")`
+                    },
+                    'gene-drug-interaction': {
+                        title: 'Gene Drug Interaction Network Analysis',
+                        category: 'Pharmacogenomics & Network Biology',
+                        description: 'Comprehensive analysis of gene-drug interaction networks combining pharmacogenomics data, molecular pathways, and drug target information. Utilized advanced network algorithms to identify key regulatory nodes, drug synergies, and potential therapeutic targets. This analysis provides insights into personalized medicine approaches and drug repurposing opportunities based on genetic profiles.',
+                        image: 'Post/DGI_set1.png',
+                        techStack: ['R Programming', 'Network Analysis', 'Bioinformatics', 'Graph Theory', 'Pharmacogenomics', 'Data Mining', 'Pathway Analysis'],
+                        results: [
+                            { metric: 'Gene Targets', value: '50+', icon: '🧬' },
+                            { metric: 'Drug Compounds', value: '25+', icon: '💊' },
+                            { metric: 'Interaction Edges', value: '100+', icon: '🔗' },
+                            { metric: 'Pathway Coverage', value: '15+', icon: '🛤️' },
+                            { metric: 'Network Density', value: '0.35', icon: '📊' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Data Integration & Preprocessing',
+                                description: 'Integrated multiple pharmacogenomics databases including DrugBank, PharmGKB, and KEGG to compile comprehensive gene-drug interaction data. Standardized gene nomenclature, drug identifiers, and interaction types while filtering for high-confidence associations and removing redundant entries.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Network Construction & Topology Analysis',
+                                description: 'Constructed bipartite and projected networks representing gene-drug interactions using graph theory principles. Calculated network topology metrics including degree centrality, betweenness centrality, clustering coefficients, and community structure to identify influential nodes and interaction patterns.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Pathway Enrichment & Functional Analysis',
+                                description: 'Performed pathway enrichment analysis using GSEA and over-representation analysis to identify biological processes and molecular functions associated with drug targets. Mapped interactions to canonical pathways and disease-specific gene sets for functional interpretation.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Network Visualization & Interactive Exploration',
+                                description: 'Developed sophisticated network visualizations using force-directed layouts and community detection algorithms. Implemented interactive features for exploring drug mechanisms, identifying potential drug combinations, and investigating off-target effects through network neighborhood analysis.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Therapeutic Insights & Drug Repurposing',
+                                description: 'Applied network-based approaches to identify novel drug-target associations and potential therapeutic applications. Analyzed network modules to predict drug synergies, adverse drug reactions, and opportunities for drug repurposing based on shared molecular targets and pathways.'
+                            }
+                        ]
+                    },
+                    'feature-selection-ml': {
+                        title: 'Feature Selection with Machine Learning',
+                        category: 'Machine Learning & Data Science',
+                        description: 'Comprehensive feature selection analysis implementing multiple ML algorithms with advanced R visualization techniques. Developed dual-axis plotting system to simultaneously display feature importance scores and model performance metrics, enabling optimal feature subset identification for predictive modeling. Demonstrates advanced statistical learning approaches for high-dimensional data analysis.',
+                        image: 'Post/R_dual_axis_plot.png',
+                        techStack: ['R Programming', 'Machine Learning', 'Feature Selection', 'Data Visualization', 'Statistical Learning', 'Model Optimization', 'Cross Validation'],
+                        results: [
+                            { metric: 'Feature Algorithms', value: '5+', icon: '🔧' },
+                            { metric: 'ML Models', value: '3+', icon: '🤖' },
+                            { metric: 'Performance Metrics', value: '4+', icon: '📊' },
+                            { metric: 'Visualization Types', value: '2', icon: '📈' },
+                            { metric: 'Cross-Validation Folds', value: '10', icon: '🔄' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Data Preprocessing & Feature Engineering',
+                                description: 'Implemented comprehensive data preprocessing pipeline including missing value imputation, outlier detection, feature scaling, and categorical encoding. Applied advanced feature engineering techniques to create derived variables and interaction terms, expanding the feature space for selection algorithms.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Multiple Feature Selection Algorithms',
+                                description: 'Applied diverse feature selection methods including univariate statistical tests (chi-square, ANOVA F-test), recursive feature elimination (RFE), LASSO regularization, Random Forest importance scores, and mutual information. Compared results across methods to identify robust feature subsets.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Machine Learning Model Implementation',
+                                description: 'Trained multiple ML algorithms including Random Forest, Support Vector Machine, and Gradient Boosting on different feature subsets. Implemented nested cross-validation to prevent overfitting and ensure reliable performance estimates across feature selection strategies.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Advanced Dual-Axis Visualization',
+                                description: 'Developed sophisticated R plotting system with dual y-axes to simultaneously visualize feature importance scores and model performance metrics. Implemented custom color schemes, annotations, and interactive elements to enhance interpretability and enable data-driven feature selection decisions.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Model Optimization & Performance Analysis',
+                                description: 'Conducted systematic analysis of feature subset sizes vs. model performance to identify optimal balance between complexity and accuracy. Generated comprehensive performance reports including precision-recall curves, ROC analysis, and feature stability assessments across different validation sets.'
+                            }
+                        ],
+                        codeSnippet: `# Feature Selection with ML in R
+library(caret)
+library(randomForest)
+library(ggplot2)
+
+# Feature selection using Random Forest
+rf_model <- randomForest(target ~ ., data = train_data)
+feature_importance <- importance(rf_model)
+
+# Cross-validation with different feature subsets
+cv_results <- lapply(c(5, 10, 15, 20), function(n_features) {
+  top_features <- names(sort(feature_importance[,1], decreasing = TRUE)[1:n_features])
+  model <- train(target ~ ., 
+                data = train_data[, c(top_features, "target")],
+                method = "rf",
+                trControl = trainControl(method = "cv", number = 10))
+  return(model$results$Accuracy[1])
+})
+
+# Dual-axis plot
+par(mar = c(5,4,4,5) + 0.1)
+plot(1:20, feature_importance[1:20,1], type = "b", 
+     col = "blue", ylab = "Feature Importance")
+par(new = TRUE)
+plot(c(5,10,15,20), cv_results, type = "b", 
+     col = "red", axes = FALSE, ylab = "")
+axis(4, col = "red")
+mtext("Model Accuracy", side = 4, line = 3, col = "red")`
+                    },
+                    'aging-dashboard': {
+                        title: 'Aging Research Interactive Dashboard',
+                        category: 'Interactive Web Application',
+                        description: 'Comprehensive Shiny web application for aging research data analysis featuring interactive visualizations, statistical modeling, and real-time data exploration. Deployed on ShinyApps.io platform, this dashboard provides researchers and clinicians with intuitive tools for analyzing aging-related datasets, generating dynamic reports, and conducting exploratory data analysis with immediate visual feedback.',
+                        image: 'https://shiny.rstudio.com/images/shiny-solo.png',
+                        techStack: ['R', 'Shiny', 'HTML/CSS', 'JavaScript', 'ggplot2', 'plotly', 'DT', 'shinydashboard'],
+                        results: [
+                            { metric: 'Live Application', value: 'Deployed', icon: '🚀' },
+                            { metric: 'Interactive Features', value: '10+', icon: '🖱️' },
+                            { metric: 'Visualization Types', value: '5+', icon: '📊' },
+                            { metric: 'Data Processing', value: 'Real-time', icon: '⚡' },
+                            { metric: 'User Interface', value: 'Responsive', icon: '📱' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Application Architecture & Design',
+                                description: 'Designed modular Shiny application architecture with separate UI and server components. Implemented responsive layout using shinydashboard framework with tabbed interfaces, sidebar navigation, and mobile-friendly design patterns for optimal user experience across devices.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Data Integration & Processing Pipeline',
+                                description: 'Built robust data processing pipeline supporting multiple aging research datasets with automated cleaning, validation, and transformation procedures. Implemented reactive programming patterns for real-time data updates and efficient memory management for large datasets.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Interactive Visualization Development',
+                                description: 'Created comprehensive suite of interactive visualizations including time-series plots, correlation matrices, survival curves, and demographic analyses. Utilized plotly for enhanced interactivity with zoom, hover, and selection capabilities, plus ggplot2 for publication-quality static plots.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Statistical Analysis Integration',
+                                description: 'Integrated advanced statistical methods including regression modeling, survival analysis, and multivariate statistics with interactive parameter selection. Implemented real-time model fitting with dynamic result updates and automated statistical reporting functionality.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Deployment & Performance Optimization',
+                                description: 'Deployed application to ShinyApps.io cloud platform with optimized loading times and resource management. Implemented caching strategies, lazy loading for large datasets, and error handling to ensure robust performance and user experience in production environment.'
+                            }
+                        ],
+                        liveDemo: 'https://vanhungtran.shinyapps.io/Aging/',
+                        codeSnippet: `# Aging Research Shiny Dashboard
+library(shiny)
+library(shinydashboard)
+library(plotly)
+library(DT)
+
+# UI Component
+ui <- dashboardPage(
+  dashboardHeader(title = "Aging Research Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Data Overview", tabName = "overview"),
+      menuItem("Visualizations", tabName = "viz"),
+      menuItem("Statistical Analysis", tabName = "stats")
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "overview",
+        fluidRow(
+          box(title = "Dataset Summary", 
+              status = "primary", 
+              solidHeader = TRUE,
+              DT::dataTableOutput("summary_table"))
+        )
+      ),
+      tabItem(tabName = "viz",
+        fluidRow(
+          box(title = "Interactive Plots",
+              status = "primary",
+              solidHeader = TRUE,
+              plotlyOutput("age_plot"))
+        )
+      )
+    )
+  )
+)
+
+# Server Component
+server <- function(input, output) {
+  output$age_plot <- renderPlotly({
+    # Interactive aging analysis visualization
+    p <- ggplot(aging_data, aes(x = age, y = biomarker)) +
+      geom_point(aes(color = group)) +
+      geom_smooth(method = "lm") +
+      theme_minimal()
+    ggplotly(p)
+  })
+}
+
+# Run Application
+shinyApp(ui = ui, server = server)`
+                    },
+                    'feature-selection-studio': {
+                        title: 'Feature Selection Studio',
+                        category: 'Interactive Machine Learning Application',
+                        description: 'Comprehensive web-based feature selection platform providing researchers and data scientists with multiple algorithms and statistical methods for optimal feature subset identification. This production-ready Shiny application integrates Random Forest, Boruta, Recursive Feature Elimination (RFE), and statistical tests with downloadable results and interactive visualizations.',
+                        image: 'https://shiny.rstudio.com/images/shiny-cheatsheet.png',
+                        techStack: ['R', 'Shiny', 'Random Forest', 'Boruta', 'RFE', 'Statistical Tests', 'Interactive Plots', 'Downloadable Reports'],
+                        results: [
+                            { metric: 'Feature Selection Methods', value: '4+', icon: '🔧' },
+                            { metric: 'Statistical Tests', value: '5+', icon: '📊' },
+                            { metric: 'Export Formats', value: '3', icon: '💾' },
+                            { metric: 'Interactive Plots', value: '6+', icon: '📈' },
+                            { metric: 'Users Served', value: '500+', icon: '👥' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'Multi-Algorithm Integration',
+                                description: 'Implemented comprehensive suite of feature selection algorithms including Random Forest importance scores, Boruta algorithm for all-relevant feature selection, Recursive Feature Elimination with cross-validation, and univariate statistical tests (t-test, chi-square, ANOVA).'
+                            },
+                            {
+                                step: 2,
+                                title: 'Interactive Data Upload & Preprocessing',
+                                description: 'Built robust data ingestion system supporting CSV, Excel, and RDS formats with automatic data type detection, missing value handling, and preprocessing options. Implemented data validation and quality checks for reliable analysis results.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Real-time Visualization Dashboard',
+                                description: 'Created dynamic visualization suite including feature importance plots, correlation matrices, performance comparisons, and algorithm consensus analysis. All plots are interactive with zoom, hover, and selection capabilities using plotly integration.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Comparative Analysis Framework',
+                                description: 'Developed algorithm comparison system allowing users to evaluate different feature selection approaches side-by-side. Implemented consensus ranking system to identify features consistently selected across multiple methods.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Production Deployment & User Experience',
+                                description: 'Deployed on ShinyApps.io with optimized performance, error handling, and user-friendly interface. Implemented downloadable reports in multiple formats (PDF, CSV, HTML) and comprehensive documentation for research reproducibility.'
+                            }
+                        ],
+                        liveDemo: 'https://vanhungtran.shinyapps.io/FSplus/'
+                    },
+                    'fda-dashboard': {
+                        title: 'FDA Novel Drug Approvals Dashboard (2015-2025)',
+                        category: 'Pharmaceutical Regulatory Analytics',
+                        description: 'Comprehensive interactive dashboard analyzing a decade of FDA novel drug approvals with advanced filtering, trend analysis, and regulatory insights. This application provides pharmaceutical researchers, regulators, and industry professionals with detailed views of approval patterns, therapeutic areas, company performance, and regulatory timelines across the most recent 10-year period.',
+                        image: 'Post/FDAplus.png',
+                        techStack: ['R', 'Shiny', 'FDA Data', 'Regulatory Analytics', 'Plotly', 'DT', 'Time Series Analysis', 'Pharmaceutical Intelligence'],
+                        results: [
+                            { metric: 'Years of Data', value: '10', icon: '📅' },
+                            { metric: 'Drug Approvals', value: '300+', icon: '💊' },
+                            { metric: 'Therapeutic Areas', value: '15+', icon: '🏥' },
+                            { metric: 'Companies Tracked', value: '100+', icon: '🏢' },
+                            { metric: 'Interactive Filters', value: '8+', icon: '🎛️' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'FDA Data Integration & Standardization',
+                                description: 'Compiled comprehensive FDA novel drug approval database from 2015-2025 including drug names, therapeutic areas, approval dates, company information, and regulatory pathways. Standardized data formats and implemented data quality controls for analysis reliability.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Multi-dimensional Filtering System',
+                                description: 'Developed advanced filtering capabilities allowing users to explore approvals by year, therapeutic area, company, drug type, and regulatory pathway. Implemented dynamic cross-filtering with real-time updates across all visualizations and summary statistics.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Trend Analysis & Visualization',
+                                description: 'Created comprehensive visualization suite including approval timelines, therapeutic area distributions, company rankings, and seasonal patterns. Implemented interactive plots with drill-down capabilities and exportable charts for regulatory reporting.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Regulatory Intelligence Features',
+                                description: 'Built analytical tools for regulatory insights including approval success rates by therapeutic area, company performance metrics, priority review analysis, and breakthrough therapy designations. Provides actionable intelligence for drug development strategy.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Professional Dashboard Deployment',
+                                description: 'Deployed production-ready dashboard with responsive design, optimized performance for large datasets, and professional UI/UX suitable for regulatory affairs, business development, and research applications. Includes comprehensive help documentation and data export capabilities.'
+                            }
+                        ],
+                        liveDemo: 'https://vanhungtran.shinyapps.io/shiapp/'
+                    },
+                    'genomic-dashboard': {
+                        title: 'Atopic Dermatitis & Psoriasis: Genomic Analysis Dashboard',
+                        category: 'Genomic Data Visualization & Analysis',
+                        description: 'Comprehensive interactive dashboard analyzing the molecular landscape of Atopic Dermatitis (AD) and Psoriasis using Gene Expression Omnibus (GEO) datasets. This visualization reveals an 81% molecular overlap between the two conditions despite their distinct clinical presentations, exploring therapeutic interventions, gene expression patterns, and the paradox between molecular efficacy and clinical outcomes.',
+                        image: 'https://www.frontiersin.org/files/Articles/568927/fimmu-11-568927-HTML/image_m/fimmu-11-568927-g002.jpg',
+                        techStack: ['HTML5', 'JavaScript', 'Chart.js', 'Tailwind CSS', 'Genomic Analysis', 'GEO Datasets', 'Data Visualization', 'Bioinformatics'],
+                        results: [
+                            { metric: 'Molecular Overlap', value: '81%', icon: '🧬' },
+                            { metric: 'Interactive Charts', value: '6', icon: '📊' },
+                            { metric: 'Therapeutic Classes', value: '3', icon: '💊' },
+                            { metric: 'Gene Expression Datasets', value: 'Multiple', icon: '📈' },
+                            { metric: 'Visualization Types', value: '5', icon: '🎨' }
+                        ],
+                        methodology: [
+                            {
+                                step: 1,
+                                title: 'GEO Dataset Integration & Analysis',
+                                description: 'Synthesized multiple Gene Expression Omnibus (GEO) datasets to analyze molecular signatures of Atopic Dermatitis and Psoriasis. Performed comparative genomic analysis to identify shared and distinct pathways, revealing 81% molecular overlap despite different clinical presentations.'
+                            },
+                            {
+                                step: 2,
+                                title: 'Disease Profile Characterization',
+                                description: 'Developed comprehensive molecular profiles distinguishing AD (IL-13 dominant, Th2 inflammation, barrier dysfunction) from Psoriasis (IL-17/IL-23 axis, Th1/Th17 inflammation, epidermal hyperplasia). Created interactive doughnut charts to visualize key molecular drivers and their relative contributions.'
+                            },
+                            {
+                                step: 3,
+                                title: 'Therapeutic Intervention Analysis',
+                                description: 'Analyzed molecular impacts of different treatment modalities including topical treatments (Crisaborole, Betamethasone), systemic therapies (Dupilumab, JAK inhibitors), and phototherapy (NB-UVB). Quantified therapeutic efficacy using gene expression modulation metrics.'
+                            },
+                            {
+                                step: 4,
+                                title: 'Interactive Visualization Development',
+                                description: 'Built responsive dashboard using Chart.js with multiple visualization types: doughnut charts for disease profiles, bar charts for treatment efficacy, radar charts for phototherapy effects, and line charts for longitudinal gene expression changes. Implemented professional color schemes and responsive design.'
+                            },
+                            {
+                                step: 5,
+                                title: 'Clinical Translation & Insights',
+                                description: 'Demonstrated the complexity of translating molecular efficacy to clinical outcomes through the Ustekinumab case study. Highlighted the paradox where strong molecular responses (robust pathway modulation) may not translate to clinical improvement, emphasizing the need for comprehensive biomarker strategies in drug development.'
+                            }
+                        ],
+                        liveDemo: 'genomic-dashboard.html',
+                        clinicalInsights: [
+                            'Despite 81% molecular overlap, AD and Psoriasis require distinct therapeutic approaches',
+                            'Dupilumab demonstrates powerful "transcriptomic correction" with dual anti-inflammatory and barrier repair effects',
+                            'Molecular efficacy does not always predict clinical success, as shown by Ustekinumab trials',
+                            'Therapeutic interventions show differential effects on inflammatory vs. barrier-related gene expression'
+                        ]
+                    }
+                };
+            }
+
+            setupFilters() {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Update active button
+                        filterButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        // Filter projects
+                        this.currentFilter = btn.dataset.filter;
+                        this.filterProjects();
+                    });
+                });
+            }
+
+            setupProjectCards() {
+                const projectCards = document.querySelectorAll('.project-card');
+                projectCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const projectId = card.dataset.project;
+                        this.openModal(projectId);
+                    });
+                });
+            }
+
+            setupModal() {
+                const modal = document.getElementById('projectModal');
+                const closeBtn = document.getElementById('closeModal');
+
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            }
+
+            filterProjects() {
+                const projects = document.querySelectorAll('.project-card');
+                
+                projects.forEach(project => {
+                    const category = project.dataset.category;
+                    const shouldShow = this.currentFilter === 'all' || category === this.currentFilter;
+                    
+                    if (shouldShow) {
+                        project.style.display = 'block';
+                        anime({
+                            targets: project,
+                            opacity: [0, 1],
+                            scale: [0.8, 1],
+                            duration: 600,
+                            easing: 'easeOutElastic(1, .8)'
+                        });
+                    } else {
+                        anime({
+                            targets: project,
+                            opacity: [1, 0],
+                            scale: [1, 0.8],
+                            duration: 300,
+                            complete: () => {
+                                project.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+
+            openModal(projectId) {
+                const project = this.projects[projectId];
+                if (!project) return;
+
+                const modal = document.getElementById('projectModal');
+                
+                // Update modal content
+                document.getElementById('modalTitle').textContent = project.title;
+                document.getElementById('modalCategory').textContent = project.category;
+                document.getElementById('modalImage').src = project.image;
+                document.getElementById('modalImage').alt = project.title;
+                document.getElementById('modalDescription').textContent = project.description;
+
+                // Update tech stack
+                const techStackContainer = document.getElementById('modalTechStack');
+                techStackContainer.innerHTML = '';
+                project.techStack.forEach(tech => {
+                    const badge = document.createElement('span');
+                    badge.className = 'tech-badge text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full';
+                    badge.textContent = tech;
+                    techStackContainer.appendChild(badge);
+                });
+
+                // Update results
+                const resultsContainer = document.getElementById('modalResults');
+                resultsContainer.innerHTML = '';
+                project.results.forEach(result => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'impact-metric p-3 rounded-lg';
+                    resultDiv.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-gray-700">${result.metric}</span>
+                            <span class="text-lg font-bold text-blue-600">${result.value}</span>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(resultDiv);
+                });
+
+                // Update methodology
+                const methodologyContainer = document.getElementById('modalMethodology');
+                methodologyContainer.innerHTML = '';
+                project.methodology.forEach(step => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'flex items-start space-x-4';
+                    stepDiv.innerHTML = `
+                        <div class="step-indicator">${step.step}</div>
+                        <div>
+                            <h5 class="font-semibold text-gray-800 mb-2">${step.title}</h5>
+                            <p class="text-gray-600">${step.description}</p>
+                        </div>
+                    `;
+                    methodologyContainer.appendChild(stepDiv);
+                });
+
+                // Show modal
+                modal.classList.remove('hidden');
+                
+                // Animate modal appearance
+                anime({
+                    targets: modal.querySelector('.bg-white'),
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 400,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+            }
+
+            animateElements() {
+                // Animate project cards
+                anime({
+                    targets: '.project-card',
+                    translateY: [50, 0],
+                    opacity: [0, 1],
+                    delay: anime.stagger(100),
+                    duration: 800,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+
+                // Animate filter buttons
+                anime({
+                    targets: '.filter-btn',
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    delay: anime.stagger(50),
+                    duration: 600,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+
+                // Animate tech stack
+                anime({
+                    targets: '.tech-item',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    delay: anime.stagger(100, {start: 1000}),
+                    duration: 600,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+
+                // Floating animation for decorative elements
+                anime({
+                    targets: '.floating-element',
+                    translateY: [-10, 10],
+                    rotate: [-2, 2],
+                    duration: 4000,
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'easeInOutSine'
+                });
+            }
+        }
+
+        // Initialize projects page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProjectsPage();
+            
+            // Filter to show only biomarker-related projects in Featured Projects
+            filterBiomarkerProjects();
+        });
+
+        function filterBiomarkerProjects() {
+            const projectCards = document.querySelectorAll('.project-card');
+            let visibleCount = 0;
+            
+            projectCards.forEach(card => {
+                const techBadges = card.querySelectorAll('.tech-badge');
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                
+                let hasBiomarkerKeyword = false;
+                
+                // Check tech badges for biomarker-related keywords
+                techBadges.forEach(badge => {
+                    const text = badge.textContent.toLowerCase();
+                    if (text.includes('biomarker') || text.includes('proteomics') || 
+                        text.includes('clinical research') || text.includes('elisa')) {
+                        hasBiomarkerKeyword = true;
+                    }
+                });
+                
+                // Check description and title for biomarker-related keywords
+                if (description.includes('biomarker') || description.includes('proteomics') || 
+                    description.includes('protein') || description.includes('galactomannan') ||
+                    title.includes('biomarker') || title.includes('proteomics')) {
+                    hasBiomarkerKeyword = true;
+                }
+                
+                if (hasBiomarkerKeyword) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update the Featured Projects subtitle to reflect the filtering
+            const subtitle = document.querySelector('section p');
+            if (subtitle) {
+                subtitle.textContent = `Biomarker research, clinical proteomics, and diagnostic applications in life sciences (${visibleCount} projects)`;
+            }
+        }
+    </script>
+</body>
+</html>
