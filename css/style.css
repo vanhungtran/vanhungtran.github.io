@@ -77,9 +77,10 @@ a:hover{color:var(--teal)}img{max-width:100%;height:auto}
 .card h3{font-size:1.1rem;margin-bottom:8px;color:var(--text-primary)}
 .card p{color:var(--text-secondary);font-size:.9rem;margin-bottom:12px;line-height:1.5}
 
-.blog-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:24px;margin-bottom:16px;transition:.3s;box-shadow:var(--shadow);display:flex;gap:20px}
+.blog-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:24px;margin-bottom:16px;transition:.3s;box-shadow:var(--shadow);display:flex;gap:20px;align-items:flex-start}
 .blog-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-.blog-card .blog-date{min-width:80px;text-align:center}
+.blog-card .blog-thumb{min-width:60px;width:60px;height:60px;border-radius:8px;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.blog-card .blog-date{min-width:70px;text-align:center;flex-shrink:0}
 .blog-card .blog-date .day{font-size:2rem;font-weight:700;color:var(--blue);line-height:1}
 .blog-card .blog-date .month{font-size:.75rem;color:var(--text-muted);text-transform:uppercase}
 .blog-card .blog-date .year{font-size:.7rem;color:var(--text-muted)}
