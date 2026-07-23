@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide: Kaplan-Meier & Cox Regression</title>
+    <!-- Chosen Palette: "Calm Medical" (Light Sky Blue, Teal, Slate Gray, White) -->
+    <!-- Application Structure Plan: A single-page, multi-section educational SPA. Navigation via a sticky header with anchor links (#intro, #km, #cox, #interactive, #summary). This structure is chosen for usability, allowing users to either follow a logical learning path (top-to-bottom) or jump directly to a specific method. The 'Interactive Explorer' section is the focal point, designed to reinforce learning by allowing users to filter mock data and see real-time updates to a KM curve, directly connecting concepts to visual outcomes. -->
+    <!-- Visualization & Content Choices:
+      1. Info: Key Term 'Censoring'. Goal: Inform. Viz: HTML/CSS diagram (timeline). Interaction: None. Justification: Simple, clear visual explanation of a core concept without images. Method: Tailwind-styled HTML.
+      2. Info: Kaplan-Meier Curve Comparison. Goal: Compare. Viz: Chart.js step-line chart. Interaction: Legend toggling. Justification: Standard visualization for KM, toggle allows focus. Method: Chart.js (`stepped: true`).
+      3. Info: Cox Model Results. Goal: Inform/Analyze. Viz: HTML Table. Interaction: Button click to reveal results. Justification: Simulates the 'analysis' step and presents the key output (Hazard Ratios) in an annotated table, which is clearer than a complex chart. Method: HTML/Tailwind, JS `onclick`.
+      4. Info: Interactive KM Demo. Goal: Explore/Synthesize. Viz: Chart.js step-line chart. Interaction: Dropdown filters for 'Group' and 'Biomarker'. Justification: Core learning tool. Connects user filtering (stratification) to an immediate visual change in the survival curve, reinforcing the concept. Method: Chart.js, JS event listeners, data filtering logic, and `chart.update()`.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .prose-custom p {
+            margin-bottom: 1rem;
+        }
+        .prose-custom h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="font-sans bg-sky-50 text-slate-800 antialiased">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 shadow-md backdrop-blur-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <h1 class="text-xl font-bold text-sky-800">Survival Analysis Explorer</h1>
+            <div class="hidden sm:flex space-x-6">
+                <a href="#intro" class="text-sm font-medium text-slate-600 hover:text-sky-700">Introduction</a>
+                <a href="#km" class="text-sm font-medium text-slate-600 hover:text-sky-700">Kaplan-Meier</a>
+                <a href="#cox" class="text-sm font-medium text-slate-600 hover:text-sky-700">Cox Regression</a>
+                <a href="#interactive" class="text-sm font-medium text-slate-600 hover:text-sky-700">Interactive Demo</a>
+                <a href="#summary" class="text-sm font-medium text-slate-600 hover:text-sky-700">Summary</a>
+            </div>
+            <div class="sm:hidden">
+                <select id="mobile-nav" class="border-none bg-transparent text-sm font-medium text-slate-600 focus:ring-0">
+                    <option value="#intro">Intro</option>
+                    <option value="#km">Kaplan-Meier</option>
+                    <option value="#cox">Cox Regression</option>
+                    <option value="#interactive">Demo</option>
+                    <option value="#summary">Summary</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Section 1: Introduction -->
+        <section id="intro" class="mb-16 prose-custom">
+            <h2 class="text-3xl font-bold text-sky-900 border-b-4 border-teal-400 pb-2 mb-6">What is Survival Analysis?</h2>
+            <p>Survival analysis is a set of statistical methods used to analyze the time it takes for an event of interest to occur. In medical research, this "event" is often death, disease recurrence, or recovery. Unlike simple "yes/no" outcomes, survival analysis is powerful because it incorporates two crucial pieces of information: <strong>if</strong> an event occurred, and <strong>when</strong> it occurred.</p>
+            <p>This guide will interactively explore the two most common tools in survival analysis: the <strong>Kaplan-Meier curve</strong>, which visualizes survival over time, and the <strong>Cox Proportional Hazards model</strong>, which investigates how different factors (like treatment, age, or biomarkers) influence survival.</p>
+
+            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Key Concepts</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2">Time-to-Event</h4>
+                    <p class="text-sm">The duration from a defined starting point (e.g., diagnosis, start of treatment) to the occurrence of the event of interest (e.g., death, disease progression).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2">Event</h4>
+                    <p class="text-sm">The specific outcome being measured. This must be a binary, "endpoint" event. We must know if it happened or not for each subject in the study.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2">Censoring</h4>
+                    <p class="text-sm">This is the most unique concept. A subject is "censored" if we lose track of them <strong>before</strong> they have the event. This happens if the study ends, or if they drop out for other reasons. We know they survived up to a certain point, but we don't know what happened after. This data is still valuable and is a key feature of survival models.</p>
+                </div>
+            </div>
+
+            <h4 class="font-semibold text-lg text-slate-700 mt-8 mb-4">Visualizing Censoring</h4>
+            <p>Imagine tracking two patients in a 5-year study:</p>
+            <div class="bg-white p-6 rounded-lg shadow space-y-4">
+                <div>
+                    <span class="font-medium">Patient A:</span>
+                    <div class="w-full bg-slate-200 rounded h-6 mt-1 flex items-center">
+                        <div class="bg-red-500 h-6 rounded-l" style="width: 60%;"></div>
+                        <span class="text-4xl text-red-700 -ml-3">×</span>
+                        <span class="ml-2 text-sm font-medium">Event at Year 3</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-medium">Patient B:</span>
+                    <div class="w-full bg-slate-200 rounded h-6 mt-1 flex items-center">
+                        <div class="bg-green-500 h-6 rounded" style="width: 100%;"></div>
+                        <span class="text-3xl text-green-700 -ml-3">●</span>
+                        <span class="ml-2 text-sm font-medium">Censored at Year 5 (Study End)</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Section 2: Kaplan-Meier (KM) Analysis -->
+        <section id="km" class="mb-16 prose-custom">
+            <h2 class="text-3xl font-bold text-sky-900 border-b-4 border-teal-400 pb-2 mb-6">The Kaplan-Meier Curve</h2>
+            <p>The Kaplan-Meier (KM) curve is the most common way to visualize survival data. It plots the estimated probability of survival over time. The curve is a step-function that drops every time an event (e.g., a death) occurs. The height of the steps gets smaller as time goes on because fewer patients are at risk. Critically, censored patients are removed from the "at-risk" pool, but they don't cause the curve to drop.</p>
+            <p>A key use of KM curves is to compare survival between two or more groups, such as a treatment group versus a placebo group. Below is a typical example comparing two hypothetical treatments.</p>
+
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow mt-8">
+                <div class="chart-container">
+                    <canvas id="kmChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-slate-600 mt-4">Click the labels ("Treatment A", "Treatment B") in the legend to hide or show a group.</p>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Comparing Curves: The Log-Rank Test</h3>
+            <p>When we see two curves like the ones above, we need to know if the difference between them is "real" (statistically significant) or just due to random chance. The <strong>log-rank test</strong> is the most common statistical test used for this. It calculates a p-value based on the observed and expected number of events in each group over time.</p>
+            <ul class="list-disc list-inside">
+                <li>A <strong>low p-value</strong> (typically < 0.05) suggests the difference between the curves is statistically significant.</li>
+                <li>A <strong>high p-value</strong> suggests there is no significant difference in survival between the groups.</li>
+            </ul>
+        </section>
+
+        <!-- Section 3: Cox Proportional Hazards Model -->
+        <section id="cox" class="mb-16 prose-custom">
+            <h2 class="text-3xl font-bold text-sky-900 border-b-4 border-teal-400 pb-2 mb-6">The Cox Proportional Hazards Model</h2>
+            <p>Kaplan-Meier curves are great for visualizing survival in one or two groups, but what if we want to know the effect of multiple factors at once? For example, how do treatment, age, and biomarker status *all* influence survival together? This is where the Cox Proportional Hazards (or Cox Regression) model comes in.</p>
+            <p>The Cox model is a regression model that investigates the relationship between patient characteristics (called covariates) and the "hazard" of an event. The <strong>hazard</strong> is the instantaneous risk of the event occurring at a specific time, given that the patient has survived up to that time.</p>
+
+            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Understanding the Hazard Ratio (HR)</h3>
+            <p>The main output of a Cox model is the <strong>Hazard Ratio (HR)</strong>. The HR tells you how a covariate affects the hazard rate.</p>
+            <div class="bg-white p-6 rounded-lg shadow my-6 space-y-3">
+                <p><strong class="text-teal-700">If HR = 1:</strong> The covariate has no effect on survival.</p>
+                <p><strong class="text-red-700">If HR > 1:</strong> The covariate <strong>increases</strong> the risk of the event. For example, an HR of 2.0 for a treatment means the treatment group has twice the risk of the event compared to the control group.</p>
+                <p><strong class="text-green-700">If HR < 1:</strong> The covariate <strong>decreases</strong> the risk (it is protective). An HR of 0.5 means the group has half the risk of the event.</p>
+            </div>
+
+            <button id="showCoxButton" class="bg-sky-700 text-white font-bold py-2 px-6 rounded-lg shadow hover:bg-sky-800 transition-all">
+                Show Hypothetical Cox Model Results
+            </button>
+
+            <div id="coxResults" class="hidden mt-6 overflow-x-auto">
+                <p class="mb-4">Here is a typical output table for a Cox model investigating the effect of Treatment, Age, and Biomarker status on survival.</p>
+                <table class="min-w-full bg-white border border-slate-300 rounded-lg shadow">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="py-3 px-4 border-b text-left text-sm font-semibold text-slate-600">Covariate</th>
+                            <th class="py-3 px-4 border-b text-left text-sm font-semibold text-slate-600">Hazard Ratio (HR)</th>
+                            <th class="py-3 px-4 border-b text-left text-sm font-semibold text-slate-600">95% Confidence Interval</th>
+                            <th class="py-3 px-4 border-b text-left text-sm font-semibold text-slate-600">p-value</th>
+                            <th class="py-3 px-4 border-b text-left text-sm font-semibold text-slate-600">Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-sky-50">
+                            <td class="py-3 px-4 border-b text-sm">Treatment (B vs. A)</td>
+                            <td class="py-3 px-4 border-b text-sm font-medium text-green-700">0.60</td>
+                            <td class="py-3 px-4 border-b text-sm">(0.45, 0.82)</td>
+                            <td class="py-3 px-4 border-b text-sm font-bold">0.001</td>
+                            <td class="py-3 px-4 border-b text-sm">Treatment B is protective. It reduces the hazard by 40% compared to Treatment A.</td>
+                        </tr>
+                        <tr class="hover:bg-sky-50">
+                            <td class="py-3 px-4 border-b text-sm">Age (per 10-year increase)</td>
+                            <td class="py-3 px-4 border-b text-sm font-medium text-red-700">1.35</td>
+                            <td class="py-3 px-4 border-b text-sm">(1.10, 1.65)</td>
+                            <td class="py-3 px-4 border-b text-sm font-bold">0.005</td>
+                            <td class="py-3 px-4 border-b text-sm">Older age is a risk factor. Each 10-year increase in age is associated with a 35% increase in hazard.</td>
+                        </tr>
+                        <tr class="hover:bg-sky-50">
+                            <td class="py-3 px-4 border-b text-sm">Biomarker (High vs. Low)</td>
+                            <td class="py-3 px-4 border-b text-sm font-medium text-slate-700">1.05</td>
+                            <td class="py-3 px-4 border-b text-sm">(0.80, 1.30)</td>
+                            <td class="py-3 px-4 border-b text-sm">0.720</td>
+                            <td class="py-3 px-4 border-b text-sm">Biomarker status does not have a statistically significant effect on the hazard.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- Section 4: Interactive Explorer -->
+        <section id="interactive" class="mb-16 prose-custom">
+            <h2 class="text-3xl font-bold text-sky-900 border-b-4 border-teal-400 pb-2 mb-6">Interactive Kaplan-Meier Plot</h2>
+            <p>Now, let's put these concepts into practice. This tool lets you generate a Kaplan-Meier curve from a mock dataset of 100 patients. You can filter the data by <strong>Treatment Group</strong> (A or B) and <strong>Biomarker Status</strong> (High or Low) to see how survival curves change for different subgroups. This process is called <strong>stratification</strong> and is a powerful way to explore your data.</p>
+            <p>Select different subgroups from the menus below and watch the survival curve update in real-time. Notice how the number of patients in the analysis changes, which affects the shape and confidence of the curve.</p>
+
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow mt-8">
+                <div class="flex flex-wrap gap-4 mb-2 p-4 bg-slate-50 rounded-lg justify-center">
+                    <div>
+                        <label for="groupFilter" class="block text-sm font-medium text-slate-700">Treatment Group:</label>
+                        <select id="groupFilter" class="mt-1 block w-full md:w-48 pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm rounded-md">
+                            <option value="all">All Groups</option>
+                            <option value="A">Treatment A</option>
+                            <option value="B">Treatment B</option>
+                            <option value="C">Treatment C</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="biomarkerFilter" class="block text-sm font-medium text-slate-700">Biomarker Status:</label>
+                        <select id="biomarkerFilter" class="mt-1 block w-full md:w-48 pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm rounded-md">
+                            <option value="all">All Statuses</option>
+                            <option value="low">Low Biomarker</option>
+                            <option value="medium">Medium Biomarker</option>
+                            <option value="high">High Biomarker</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Color Legend -->
+                <div class="flex flex-wrap gap-3 justify-center mb-6 text-xs font-semibold">
+                    <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 border border-red-200">Treatment A</span>
+                    <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 border border-green-200">Treatment B</span>
+                    <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-200">Treatment C</span>
+                    <span class="w-full sm:w-auto hidden sm:block border-l border-slate-300 mx-2"></span>
+                    <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 border border-amber-200">Low Bio</span>
+                    <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200">Med Bio</span>
+                    <span class="px-3 py-1 rounded-full bg-violet-100 text-violet-700 border border-violet-200">High Bio</span>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="interactiveKmChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-slate-600 mt-4">Patients in analysis: <strong id="patientCount" class="text-sky-800">150</strong></p>
+            </div>
+
+        </section>
+
+        <!-- Section 5: Summary -->
+        <section id="summary" class="prose-custom">
+            <h2 class="text-3xl font-bold text-sky-900 border-b-4 border-teal-400 pb-2 mb-6">Summary: KM vs. Cox</h2>
+            <p>Kaplan-Meier curves and Cox Proportional Hazards models are powerful tools for medical research. They work together to help us understand survival and the factors that influence it.</p>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2">Use Kaplan-Meier (KM) when...</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>You want to visualize the survival probability over time for one or more groups.</li>
+                        <li>You want to compare the overall survival experience between groups (e.g., Treatment vs. Placebo).</li>
+                        <li>Your primary question is "What is the survival rate at 5 years?"</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2">Use Cox Regression when...</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>You need to understand the effect of multiple factors (e.g., age, sex, treatment, biomarker) on survival simultaneously.</li>
+                        <li>You want to quantify the risk associated with a specific factor (i.e., calculate a Hazard Ratio).</li>
+                        <li>You need to "adjust" for other factors to get a more accurate estimate of a treatment's effect.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Mobile Nav ---
+            const mobileNav = document.getElementById('mobile-nav');
+            if(mobileNav) {
+                mobileNav.addEventListener('change', (e) => {
+                    const targetId = e.target.value;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // --- Chart 1: Static Kaplan-Meier Chart ---
+            const kmCtx = document.getElementById('kmChart');
+            if (kmCtx) {
+                const kmData = {
+                    labels: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                    datasets: [
+                        {
+                            label: 'Treatment A',
+                            data: [1, 1, 0.95, 0.90, 0.88, 0.82, 0.75, 0.70, 0.68, 0.65, 0.62],
+                            borderColor: 'rgb(239, 68, 68)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            stepped: true,
+                            borderWidth: 2,
+                            pointRadius: 0,
+                        },
+                        {
+                            label: 'Treatment B',
+                            data: [1, 1, 0.98, 0.95, 0.92, 0.90, 0.88, 0.85, 0.82, 0.80, 0.78],
+                            borderColor: 'rgb(34, 197, 94)',
+                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                            stepped: true,
+                            borderWidth: 2,
+                            pointRadius: 0,
+                        }
+                    ]
+                };
+
+                new Chart(kmCtx, {
+                    type: 'line',
+                    data: kmData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1.05,
+                                title: {
+                                    display: true,
+                                    text: 'Probability of Survival'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Time (Months)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Kaplan-Meier Survival Curve by Treatment Group'
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Section 3: Cox Model Interaction ---
+            const showCoxButton = document.getElementById('showCoxButton');
+            const coxResults = document.getElementById('coxResults');
+            if (showCoxButton && coxResults) {
+                showCoxButton.addEventListener('click', () => {
+                    coxResults.classList.toggle('hidden');
+                    if (!coxResults.classList.contains('hidden')) {
+                        showCoxButton.textContent = 'Hide Hypothetical Results';
+                    } else {
+                        showCoxButton.textContent = 'Show Hypothetical Cox Model Results';
+                    }
+                });
+            }
+
+            // --- Section 4: Interactive Explorer ---
+
+            // 1. Mock Patient Data (Expanded for 3 Groups x 3 Statuses)
+            // Function to generate random data for demonstration
+            function generateMockData(count) {
+                const data = [];
+                const groups = ['A', 'B', 'C'];
+                const biomarkers = ['low', 'medium', 'high'];
+
+                for(let i=0; i<count; i++) {
+                    const group = groups[Math.floor(Math.random() * groups.length)];
+                    const biomarker = biomarkers[Math.floor(Math.random() * biomarkers.length)];
+
+                    // Create some separation between groups for visual effect
+                    let baseTime = 30;
+                    if(group === 'A') baseTime = 40; // A lives longer
+                    if(group === 'B') baseTime = 50; // B lives longest
+                    if(group === 'C') baseTime = 20; // C has worst survival
+
+                    // Biomarker effect
+                    if(biomarker === 'high') baseTime += 10;
+                    if(biomarker === 'low') baseTime -= 10;
+
+                    // Randomize time
+                    let time = Math.floor(Math.random() * 80) + 1;
+                    // Add bias based on group/biomarker
+                    if(Math.random() > 0.5) time += (baseTime / 2);
+
+                    // Cap at 100
+                    if(time > 100) time = 100;
+
+                    // Random censor (0 or 1), heavily weighted towards event (1)
+                    const event = Math.random() > 0.3 ? 1 : 0;
+
+                    data.push({ time, event, group, biomarker });
+                }
+                return data;
+            }
+
+            // Generate 200 patients
+            const mockPatientData = generateMockData(200);
+
+            // 2. Get DOM elements
+            const groupFilter = document.getElementById('groupFilter');
+            const biomarkerFilter = document.getElementById('biomarkerFilter');
+            const patientCountEl = document.getElementById('patientCount');
+            const interactiveCtx = document.getElementById('interactiveKmChart');
+            let interactiveChart;
+
+            if (interactiveCtx && groupFilter && biomarkerFilter && patientCountEl) {
+                // 3. Kaplan-Meier Calculation Function (Unchanged)
+                function calculateKMSurvival(data) {
+                    if (data.length === 0) {
+                        return [{ time: 0, survival: 1 }];
+                    }
+
+                    const sortedData = [...data].sort((a, b) => a.time - b.time);
+                    const eventTimes = [...new Set(sortedData.filter(p => p.event === 1).map(p => p.time))].sort((a, b) => a - b);
+
+                    let survivalPoints = [{ time: 0, survival: 1 }];
+                    let survival = 1;
+
+                    // Standard KM calculation
+                    for (const t of eventTimes) {
+                        const eventsAtTime = sortedData.filter(p => p.time === t && p.event === 1).length;
+                        const atRiskAtTime = sortedData.filter(p => p.time >= t).length;
+
+                        if (atRiskAtTime > 0) {
+                            const newSurvival = survival * (1 - (eventsAtTime / atRiskAtTime));
+                            survivalPoints.push({ time: t, survival: survival }); // Step logic
+                            survivalPoints.push({ time: t, survival: newSurvival });
+                            survival = newSurvival;
+                        }
+                    }
+
+                    const maxTime = Math.max(...sortedData.map(p => p.time));
+                    if (survivalPoints.length > 0 && survivalPoints[survivalPoints.length - 1].time < maxTime) {
+                         survivalPoints.push({ time: maxTime, survival: survival });
+                    }
+
+                    return survivalPoints;
+                }
+
+                // 4. Chart Update Function
+                function updateInteractiveChart() {
+                    const groupSelection = groupFilter.value;
+                    const biomarkerSelection = biomarkerFilter.value;
+
+                    // Expand "All" selections into arrays of their components
+                    const groupsToPlot = groupSelection === 'all' ? ['A', 'B', 'C'] : [groupSelection];
+                    const biomarkersToPlot = biomarkerSelection === 'all' ? ['low', 'medium', 'high'] : [biomarkerSelection];
+
+                    const newDatasets = [];
+                    let totalPatients = 0;
+
+                    // Nested loop for up to 3x3 = 9 curves
+                    groupsToPlot.forEach(groupName => {
+                        biomarkersToPlot.forEach(biomarkerStatus => {
+
+                            const filteredData = mockPatientData.filter(p =>
+                                p.group === groupName && p.biomarker === biomarkerStatus
+                            );
+
+                            totalPatients += filteredData.length;
+
+                            if (filteredData.length > 0) {
+                                const survivalPoints = calculateKMSurvival(filteredData);
+                                const dataPoints = survivalPoints.map(p => ({ x: p.time, y: p.survival }));
+
+                                // --- 3x3 Logic ---
+                                let borderColor = '#000';
+                                let borderDash = [];
+                                let label = '';
+
+                                const varyingGroups = groupsToPlot.length > 1;
+                                const varyingBiomarkers = biomarkersToPlot.length > 1;
+
+                                // Helper map for colors
+                                const groupColors = {
+                                    'A': 'rgb(239, 68, 68)',   // Red
+                                    'B': 'rgb(34, 197, 94)',   // Green
+                                    'C': 'rgb(59, 130, 246)'   // Blue
+                                };
+
+                                const bioColors = {
+                                    'low': 'rgb(245, 158, 11)',    // Amber
+                                    'medium': 'rgb(107, 114, 128)', // Gray
+                                    'high': 'rgb(139, 92, 246)'    // Violet
+                                };
+
+                                if (varyingGroups && !varyingBiomarkers) {
+                                    // Plotting Multiple Groups, One Biomarker -> Color by Group
+                                    borderColor = groupColors[groupName];
+                                    label = `Trt ${groupName}`;
+                                }
+                                else if (!varyingGroups && varyingBiomarkers) {
+                                    // Plotting One Group, Multiple Biomarkers -> Color by Biomarker
+                                    borderColor = bioColors[biomarkerStatus];
+                                    label = `${biomarkerStatus.charAt(0).toUpperCase() + biomarkerStatus.slice(1)} Bio`;
+                                }
+                                else if (varyingGroups && varyingBiomarkers) {
+                                    // Plotting Everything (9 lines) -> Color by Group, Dash by Biomarker
+                                    borderColor = groupColors[groupName];
+
+                                    if (biomarkerStatus === 'low') borderDash = []; // Solid
+                                    if (biomarkerStatus === 'medium') borderDash = [10, 5]; // Long Dash
+                                    if (biomarkerStatus === 'high') borderDash = [3, 3]; // Dotted
+
+                                    label = `${groupName} - ${biomarkerStatus}`;
+                                }
+                                else {
+                                    // Specific Group, Specific Biomarker -> Color by Group
+                                    borderColor = groupColors[groupName];
+                                    label = `${groupName} / ${biomarkerStatus}`;
+                                }
+
+                                newDatasets.push({
+                                    label: label,
+                                    data: dataPoints,
+                                    borderColor: borderColor,
+                                    backgroundColor: borderColor.replace('rgb', 'rgba').replace(')', ', 0.1)'),
+                                    borderDash: borderDash,
+                                    stepped: true,
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                    fill: false,
+                                });
+                            }
+                        });
+                    });
+
+                    patientCountEl.textContent = totalPatients;
+
+                    interactiveChart.data.datasets = newDatasets;
+                    interactiveChart.update();
+                }
+
+                // 5. Initialize Chart
+                interactiveChart = new Chart(interactiveCtx, {
+                    type: 'line',
+                    data: {
+                        datasets: [] // Datasets are populated by the update function
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1.05,
+                                title: {
+                                    display: true,
+                                    text: 'Probability of Survival'
+                                }
+                            },
+                            x: {
+                                type: 'linear', // Linear scale is crucial for correct time plotting of multiple lines
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Time (Days)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true, // Show legend to identify A vs B
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Dynamic Kaplan-Meier Curve'
+                            },
+                            tooltip: {
+                                mode: 'nearest',
+                                axis: 'x',
+                                intersect: false
+                            }
+                        }
+                    }
+                });
+
+                // 6. Add Event Listeners
+                groupFilter.addEventListener('change', updateInteractiveChart);
+                biomarkerFilter.addEventListener('change', updateInteractiveChart);
+
+                // 7. Initial Call
+                updateInteractiveChart();
+            }
+
+        });
+    </script>
+</body>
+</html>
