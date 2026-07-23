@@ -80,36 +80,22 @@
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-effect">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">📊</span>
-                    </div>
-                    <h1 class="display-font text-xl text-gray-800">Lucas VHH TRAN</h1>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Portfolio</a>
-                    <a href="projects.html" class="text-blue-600 font-medium">Projects</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">Blog</a>
-                    <a href="CVLucasTRAN.pdf" target="_blank" class="text-gray-700 hover:text-blue-500 font-medium transition-colors flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        CV
-                    </a>
-                </div>
-                <button class="md:hidden p-2 rounded-md text-gray-700 hover:bg-white/20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+<body>
+    <div class="scroll-progress"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Lucas VHH TRAN</a>
+            <nav class="nav-links">
+                <a href="index.html">Portfolio</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="blog.html">Blog</a>
+                <a href="CVLucasTRAN.pdf" target="_blank">CV</a>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light/dark theme"></button>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="pt-20 pb-12 relative overflow-hidden">
@@ -1765,5 +1751,6 @@ shinyApp(ui = ui, server = server)`
             }
         }
     </script>
+    <script src="js/effects.js"></script>
 </body>
 </html>

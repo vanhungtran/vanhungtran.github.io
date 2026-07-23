@@ -1,6 +1,24 @@
-/* ===== VisualSite Dark Theme Effects ===== */
+/* ===== VisualSite Effects ===== */
 (function() {
   'use strict';
+
+  // ── Theme Toggle ──
+  function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else if (saved === 'light') document.documentElement.removeAttribute('data-theme');
+  }
+  initTheme();
+  window.toggleTheme = function() {
+    const current = document.documentElement.getAttribute('data-theme');
+    if (current === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  };
 
   // ── Particle System ──
   function initParticles() {
