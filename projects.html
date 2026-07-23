@@ -138,20 +138,17 @@
             <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium active" data-filter="all">
                 All Projects
             </button>
-            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="machine-learning">
-                Machine Learning
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="research">
+                Research & Bioinformatics
             </button>
             <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="visualization">
                 Data Visualization
             </button>
             <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="analytics">
-                Analytics
+                Statistics & Books
             </button>
-            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="nlp">
-                NLP
-            </button>
-            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="research">
-                Research
+            <button class="filter-btn px-6 py-3 rounded-full glass-effect font-medium" data-filter="machine-learning">
+                Machine Learning
             </button>
         </div>
     </section>
@@ -233,146 +230,56 @@
                 </div>
             </div>
 
-            <!-- Project 1: Customer Churn Prediction -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="churn-prediction">
-                <img src="https://kimi-web-img.moonshot.cn/img/www.salesforceben.com/f03e871f7ff9b375d939d991e66ecc1b6c2971ef.png" alt="Customer Churn Prediction" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Customer Churn Prediction</h3>
-                <p class="text-sm text-gray-600 mb-4">Developed a machine learning model to predict customer churn with 89% accuracy, reducing customer loss by 25% through proactive retention strategies.</p>
+            <!-- R Packages -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="atcddd">
+                <img src="https://www.whocc.no/atc_ddd_index/graphics/whocc_logo.png" alt="ATC/DDD" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">atcddd: WHO ATC/DDD R Package</h3>
+                <p class="text-sm text-gray-600 mb-4">R package for retrieving, parsing and computing with the WHO Anatomical Therapeutic Chemical (ATC) Classification and Defined Daily Dose (DDD) Index — works offline after one download.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Scikit-learn</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Random Forest</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">WHO ATC/DDD</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Pharma</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Model Accuracy</span>
-                        <span class="text-lg font-bold text-blue-600">89%</span>
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/atcddd" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2: Sales Analytics Dashboard -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="sales-dashboard">
-                <img src="https://kimi-web-img.moonshot.cn/img/public.tableau.com/e669bf40111a3e83080740c82af49eee0fad88b9.png" alt="Sales Analytics Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Interactive Sales Dashboard</h3>
-                <p class="text-sm text-gray-600 mb-4">Created a comprehensive Tableau dashboard providing real-time sales insights and forecasting capabilities for executive decision-making.</p>
+            <!-- aucmat -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="aucmat">
+                <img src="https://cran.r-project.org/web/packages/pROC/vignettes/auc-compared.png" alt="aucmat ROC" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">aucmat: Matrix ROC Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Matrix-first ROC analysis for high-dimensional molecular biomarker data with DeLong/bootstrap inference, multiplicity adjustment, and rank-stability analysis.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">Tableau</span>
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">SQL</span>
-                    <span class="tech-badge text-xs bg-teal-100 text-teal-600 px-2 py-1 rounded-full">Data Modeling</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">ROC Analysis</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Biomarkers</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Decision Speed</span>
-                        <span class="text-lg font-bold text-teal-600">60% Faster</span>
+                        <span class="text-sm font-medium text-gray-700">Documentation</span>
+                        <a href="https://vanhungtran.github.io/aucmat/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3: Market Basket Analysis -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="market-basket">
-                <img src="https://kimi-web-img.moonshot.cn/img/assets.qlik.com/3018a0ad0c442e53fe13100e7af370e8f2862f90.png" alt="Market Basket Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Market Basket Analysis</h3>
-                <p class="text-sm text-gray-600 mb-4">Applied association rule mining to identify product relationships, increasing cross-selling revenue by 30% through targeted recommendations.</p>
+            <!-- cliomicplot -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="cliomicplot">
+                <img src="https://ggplot2.tidyverse.org/logo.png" alt="cliomicplot" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">cliomicplot: Clinical Omics Plots</h3>
+                <p class="text-sm text-gray-600 mb-4">Publication-ready visualizations for clinical and multi-omics data: forest plots, volcano plots, KM curves, waterfall/swimmer plots, heatmaps, and PCA with journal-specific themes.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
-                    <span class="tech-badge text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full">Apriori</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Association Rules</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">ggplot2</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Viz</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Revenue Increase</span>
-                        <span class="text-lg font-bold text-purple-600">30%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 4: Sentiment Analysis System -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="nlp" data-project="sentiment-analysis">
-                <img src="https://kimi-web-img.moonshot.cn/img/chartio.com/2e9bff061493266c1a6f1ceedc72415e3f1c5c9b.png" alt="Sentiment Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Social Media Sentiment Analysis</h3>
-                <p class="text-sm text-gray-600 mb-4">Built an NLP pipeline to analyze customer sentiment from social media, providing real-time brand monitoring and customer insights.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">NLTK</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">BERT</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Accuracy</span>
-                        <span class="text-lg font-bold text-green-600">92%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 5: Time Series Forecasting -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="time-series">
-                <img src="https://kimi-web-img.moonshot.cn/img/fiverr-res.cloudinary.com/f30c7a8e6403b0e2fcf9fba421295c86d0af3b5c.jpg" alt="Time Series Forecasting" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Demand Forecasting Model</h3>
-                <p class="text-sm text-gray-600 mb-4">Developed advanced time series models to predict product demand, optimizing inventory management and reducing stockouts by 40%.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">Prophet</span>
-                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">LSTM</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">MAPE</span>
-                        <span class="text-lg font-bold text-orange-600">8.5%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 6: Fraud Detection System -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="fraud-detection">
-                <img src="https://kimi-web-img.moonshot.cn/img/canonicalized.com/32f43ba45715fb79f700ab131f0db7f9dad5ef42.png" alt="Fraud Detection" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Real-time Fraud Detection</h3>
-                <p class="text-sm text-gray-600 mb-4">Built an anomaly detection system to identify fraudulent transactions in real-time, preventing $2M+ in potential losses.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Isolation Forest</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Apache Kafka</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Fraud Prevention</span>
-                        <span class="text-lg font-bold text-red-600">$2M+</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 7: Recommendation Engine -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="recommendation-engine">
-                <img src="https://kimi-web-img.moonshot.cn/img/www.boldbi.com/35c2d734ac18816f9a9a7ea80f9e1c4c751cf2c8.png" alt="Recommendation Engine" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Personalized Recommendation Engine</h3>
-                <p class="text-sm text-gray-600 mb-4">Developed a collaborative filtering system to provide personalized product recommendations, increasing user engagement by 45%.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Spark</span>
-                    <span class="tech-badge text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full">Collaborative Filtering</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Engagement Increase</span>
-                        <span class="text-lg font-bold text-yellow-600">45%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 8: A/B Testing Platform -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="ab-testing">
-                <img src="https://kimi-web-img.moonshot.cn/img/www.witanalytica.com/246ba576970f44a3b99d032c329e4493d2ef044d.png" alt="A/B Testing Platform" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">A/B Testing Analytics Platform</h3>
-                <p class="text-sm text-gray-600 mb-4">Built a comprehensive A/B testing platform with statistical significance testing, enabling data-driven decision making across product teams.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Statistics</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Bayesian Methods</span>
-                </div>
-                <div class="impact-metric p-3 rounded-lg">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Test Accuracy</span>
-                        <span class="text-lg font-bold text-green-600">95%</span>
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/cliomicplot" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
@@ -493,43 +400,59 @@
                 </div>
             </div>
 
-            <!-- Project 15: Feature Selection with Machine Learning -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="feature-selection-ml">
-                <img src="Post/R_dual_axis_plot.png" alt="Feature Selection ML Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Feature Selection with Machine Learning</h3>
-                <p class="text-sm text-gray-600 mb-4">Advanced feature selection analysis using R with dual-axis plotting to visualize feature importance scores and model performance metrics across multiple ML algorithms.</p>
+            <!-- cytometree -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="cytometree">
+                <img src="https://raw.githubusercontent.com/sistm/cytometree/master/vignettes/cytometree.png" alt="cytometree" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">cytometree: Automated Cytometry Gating</h3>
+                <p class="text-sm text-gray-600 mb-4">Automated cytometry gating and annotation using bimodal distribution hypothesis and binary tree construction with AIC-based splitting algorithms.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Feature Selection</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Machine Learning</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Cytometry</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">FlowSOM</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Model Performance</span>
-                        <span class="text-lg font-bold text-green-600">Optimized</span>
+                        <span class="text-sm font-medium text-gray-700">CRAN Package</span>
+                        <a href="https://github.com/vanhungtran/cytometree" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 16: Aging Interactive Dashboard -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="aging-dashboard">
-                <img src="https://shiny.rstudio.com/images/shiny-solo.png" alt="Aging Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Aging Research Interactive Dashboard</h3>
-                <p class="text-sm text-gray-600 mb-4">Comprehensive Shiny application analyzing aging-related data with interactive visualizations, statistical modeling, and real-time data exploration capabilities.</p>
+            <!-- repurp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="repurp">
+                <img src="Post/DGI_set1.png" alt="Drug Repurposing" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">repurp: Drug Repurposing Networks</h3>
+                <p class="text-sm text-gray-600 mb-4">R package for building, analyzing, and visualizing drug–gene/biomarker interaction networks with 15 visualization backends and curated AD drug reference data.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">R</span>
-                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Shiny</span>
-                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Interactive</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Network Analysis</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Drug Discovery</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Live Application</span>
-                        <a href="https://vanhungtran.shinyapps.io/Aging/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Launch →</a>
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/repurp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 17: Atopic Dermatitis & Psoriasis Genomic Analysis -->
+            <!-- survivalApp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="survivalApp">
+                <img src="https://shiny.rstudio.com/images/shiny-solo.png" alt="survivalApp" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">survivalApp: Survival Analysis Shiny</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive Shiny application for medical survival analysis: Kaplan-Meier curves, Cox proportional hazards, diagnostics, forest plots, and publication-ready exports.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Shiny</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Survival Analysis</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Stats</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/survivalApp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
             <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="genomic-dashboard">
                 <img src="Post/AD_Pso.png" alt="Genomic Analysis Dashboard" class="w-full h-48 object-cover rounded-xl mb-4">
                 <h3 class="font-semibold text-gray-800 mb-2">Atopic Dermatitis & Psoriasis: Genomic Analysis</h3>
@@ -547,20 +470,56 @@
                 </div>
             </div>
 
-            <!-- Project 17: Computer Vision System -->
-            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="computer-vision">
-                <img src="https://kimi-web-img.moonshot.cn/img/www.geckoboard.com/2605fd517d3e4a523710fe881153ce20c0a09c60.png" alt="Computer Vision" class="w-full h-48 object-cover rounded-xl mb-4">
-                <h3 class="font-semibold text-gray-800 mb-2">Quality Control Vision System</h3>
-                <p class="text-sm text-gray-600 mb-4">Implemented a deep learning-based computer vision system for automated quality control, reducing defect detection time by 85%.</p>
+            <!-- WGCNAApp -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="wgcna-app">
+                <img src="https://shiny.rstudio.com/images/shiny-solo.png" alt="WGCNAApp" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">WGCNAApp: Gene Co-expression Network</h3>
+                <p class="text-sm text-gray-600 mb-4">Interactive Shiny app for weighted gene co-expression network analysis (WGCNA) with DESeq2 normalization, QC plots, and GO/KEGG enrichment analysis.</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
-                    <span class="tech-badge text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">OpenCV</span>
-                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">TensorFlow</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Shiny</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">WGCNA</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Transcriptomics</span>
                 </div>
                 <div class="impact-metric p-3 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-gray-700">Detection Speed</span>
-                        <span class="text-lg font-bold text-orange-600">85% Faster</span>
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/WGCNAApp" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDPKwithR -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="pdpk-book">
+                <img src="https://quarto.org/quarto.png" alt="PKPD Book" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">PDPKwithR: PK/PD Modeling Book</h3>
+                <p class="text-sm text-gray-600 mb-4">21-chapter Quarto book "Master Pharmacokinetics and Pharmacodynamics with R" covering classical PK, PD dose-response, PK/PD linkage, and population modeling.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Quarto</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">PK/PD</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Online Book</span>
+                        <a href="https://vanhungtran.github.io/PDPKwithR/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RforMS -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="rforms-book">
+                <img src="https://quarto.org/quarto.png" alt="Mass Spec Book" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">RforMS: Mass Spectrometry with R</h3>
+                <p class="text-sm text-gray-600 mb-4">26-chapter Quarto book covering the full proteomics/metabolomics workflow from raw data import to biomarker modeling with Bioconductor.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Bioconductor</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Proteomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Online Book</span>
+                        <a href="https://vanhungtran.github.io/RforMS/" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">Read →</a>
                     </div>
                 </div>
             </div>
@@ -582,6 +541,168 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Atopic-Dermatitis-Meta-Transcriptomic -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="ad-meta-transcriptomic">
+                <img src="Post/AD_Pso.png" alt="AD Meta-Analysis" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h3 class="font-semibold text-gray-800 mb-2">AD Meta-Transcriptomic Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Cross-platform meta-analysis of the atopic dermatitis transcriptomic disease signature across 39 datasets (2,138 individuals), with causal inference, drug repurposing, and biomarker analyses.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Meta-analysis</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Transcriptomics</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">39 Datasets | 2,138 Samples</span>
+                        <a href="https://github.com/vanhungtran/Atopic-Dermatitis-Meta-Transcriptomic" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- latent_pathR -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="research" data-project="latent-pathr">
+                <img src="https://bioconductor.org/images/logo_bioconductor.gif" alt="Latent Pathway" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">latent_pathR: Pathway Analysis</h3>
+                <p class="text-sm text-gray-600 mb-4">Toolkit for latent pathway analysis of longitudinal transcriptomic data via GSVA, k-means clustering, Markov transition modeling, ridge regression, and optimal transport.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">GSVA</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Longitudinal</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/latent_pathR" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- rcreg -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="rcreg">
+                <img src="https://cran.r-project.org/logo/Rlogo.svg" alt="rcreg" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">rcreg: Random Coefficient Models</h3>
+                <p class="text-sm text-gray-600 mb-4">R package providing a high-level interface for fitting random coefficient regression models (random intercept/slope LMMs) for repeated measurement data, built on lme4.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R Package</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Mixed Models</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Longitudinal</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/rcreg" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- coverage -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="coverage-ci">
+                <img src="https://cran.r-project.org/logo/Rlogo.svg" alt="coverage" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">coverage: CI for Binomial Proportions</h3>
+                <p class="text-sm text-gray-600 mb-4">Compute and visualize coverage probabilities for the difference between two binomial proportions with 11 confidence interval methods implemented.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Statistics</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">CI Methods</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/coverage" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- nCorona2019 -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="ncov-modeling">
+                <img src="https://raw.githubusercontent.com/vanhungtran/nCorona2019/master/animation.gif" alt="COVID-19 Model" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">nCorona2019: COVID-19 Modeling</h3>
+                <p class="text-sm text-gray-600 mb-4">R code for modeling Novel Coronavirus (COVID-19) confirmed cases with animated visualizations using gganimate.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">gganimate</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Epidemiology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/nCorona2019" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- airflow-data-pipeline -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="airflow-pipeline">
+                <img src="https://airflow.apache.org/images/feature-image.png" alt="Airflow Pipeline" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Airflow Medical Data Pipeline</h3>
+                <p class="text-sm text-gray-600 mb-4">Comprehensive Apache Airflow data pipeline with web dashboard, offline execution, and SecuTrial-integrated medical data processing for clinical data workflows.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Apache Airflow</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Clinical Data</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/airflow-data-pipeline" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- geo_epidemiology -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="visualization" data-project="geo-epidemiology">
+                <img src="https://raw.githubusercontent.com/vanhungtran/geo_epidemiology/master/vietnam_cpi_map.png" alt="Geo Epidemiology" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">Geo-Epidemiology Mapping</h3>
+                <p class="text-sm text-gray-600 mb-4">Geo-epidemiology example: Vietnam Provincial Competitiveness Index (CPI) 2018 choropleth visualization with tidyverse and maptools.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">GIS</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Epidemiology</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/geo_epidemiology" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My-work -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="machine-learning" data-project="mywork-ml">
+                <img src="https://jupyter.org/assets/homepage/main-logo.svg" alt="ML Notebooks" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">My-work: ML/AI Notebooks</h3>
+                <p class="text-sm text-gray-600 mb-4">Collection of ML/AI Jupyter notebooks: pneumonia X-ray detection, heart disease prediction, ECG analysis, Bayesian regression, and Python/R tutorials.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Python</span>
+                    <span class="tech-badge text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">R</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Jupyter</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/My-work" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- opendata -->
+            <div class="project-card glass-effect rounded-2xl p-6" data-category="analytics" data-project="opendata">
+                <img src="https://raw.githubusercontent.com/vanhungtran/opendata/main/datasets.png" alt="Open Data" class="w-full h-48 object-contain rounded-xl mb-4 bg-gray-50 p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">opendata: Dataset Collection</h3>
+                <p class="text-sm text-gray-600 mb-4">Curated collection of open datasets: NYC Airbnb, Olink assays, diabetes, heart disease, DRUGBANK drug-gene interactions, epidemiology linelist, and more.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-badge text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Open Data</span>
+                    <span class="tech-badge text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">CSV/R/Excel</span>
+                    <span class="tech-badge text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Education</span>
+                </div>
+                <div class="impact-metric p-3 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">GitHub Repo</span>
+                        <a href="https://github.com/vanhungtran/opendata" target="_blank" class="text-lg font-bold text-blue-600 hover:underline">View →</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -592,59 +713,59 @@
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">🐍</span>
+                        <span class="text-2xl">�</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">Python</h4>
+                    <h4 class="font-semibold text-gray-800">R</h4>
                     <p class="text-sm text-gray-600">Primary language</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">📊</span>
+                        <span class="text-2xl">🐍</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">R</h4>
-                    <p class="text-sm text-gray-600">Statistical computing</p>
+                    <h4 class="font-semibold text-gray-800">Python</h4>
+                    <p class="text-sm text-gray-600">ML & pipelines</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">🗄️</span>
+                        <span class="text-2xl">🧬</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">SQL</h4>
-                    <p class="text-sm text-gray-600">Data management</p>
-                </div>
-                <div class="tech-item">
-                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">📈</span>
-                    </div>
-                    <h4 class="font-semibold text-gray-800">Tableau</h4>
-                    <p class="text-sm text-gray-600">Visualization</p>
+                    <h4 class="font-semibold text-gray-800">Bioconductor</h4>
+                    <p class="text-sm text-gray-600">Genomics</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">🧠</span>
+                        <span class="text-2xl">✨</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">TensorFlow</h4>
-                    <p class="text-sm text-gray-600">Deep learning</p>
+                    <h4 class="font-semibold text-gray-800">Shiny</h4>
+                    <p class="text-sm text-gray-600">Interactive apps</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">⚡</span>
+                        <span class="text-2xl">📦</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">Spark</h4>
-                    <p class="text-sm text-gray-600">Big data</p>
+                    <h4 class="font-semibold text-gray-800">R Packages</h4>
+                    <p class="text-sm text-gray-600">10+ packages</p>
+                </div>
+                <div class="tech-item">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">📖</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Quarto/Rmd</h4>
+                    <p class="text-sm text-gray-600">Books & reports</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">📊</span>
+                        <span class="text-2xl">🧠</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">SAS</h4>
-                    <p class="text-sm text-gray-600">Analytics platform</p>
+                    <h4 class="font-semibold text-gray-800">ML/DL</h4>
+                    <p class="text-sm text-gray-600">Keras, sklearn</p>
                 </div>
                 <div class="tech-item">
                     <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-2xl">🔥</span>
+                        <span class="text-2xl">🌐</span>
                     </div>
-                    <h4 class="font-semibold text-gray-800">PyTorch</h4>
-                    <p class="text-sm text-gray-600">Machine learning</p>
+                    <h4 class="font-semibold text-gray-800">Web Dev</h4>
+                    <p class="text-sm text-gray-600">HTML, Tailwind</p>
                 </div>
             </div>
         </div>
