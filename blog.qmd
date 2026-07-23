@@ -1,0 +1,32 @@
+---
+title: "Blog"
+description: "Biostatistics blog — insights, methodologies, and applications in clinical research and medical data science"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  page-size: 10
+---
+
+```{=html}
+<script src="https://cdn.tailwindcss.com"></script>
+
+<section class="pt-4 pb-8 relative overflow-hidden">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="display-font text-5xl md:text-6xl text-gray-800 mb-4">
+            <span class="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">Biostatistics Blog</span>
+        </h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Insights, methodologies, and applications in biostatistics, clinical research, and medical data science
+        </p>
+        <div class="mt-6">
+            <a href="https://rpubs.com/hung/" target="_blank" class="inline-flex items-center bg-gradient-to-r from-blue-500 to-teal-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all hover:scale-105">
+                View My RPubs Publications →
+            </a>
+        </div>
+    </div>
+</section>
+```

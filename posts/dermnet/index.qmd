@@ -1,0 +1,11 @@
+---
+title: "DermNet: Dermatology Image Analysis"
+description: "Deep learning approaches for dermatological image classification and skin disease diagnosis using convolutional neural networks"
+date: "2024-08-25"
+categories: [Deep Learning, Dermatology]
+image: "../Post/DermNet.png"
+---
+
+```{=html}
+<iframe src="../../Post/DermNet.html" style="width:100%; height:100vh; border:none;"></iframe>
+```

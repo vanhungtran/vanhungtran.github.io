@@ -1,0 +1,243 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: 'Inter', sans-serif;
+$font-family-monospace: 'JetBrains Mono', monospace;
+
+/*-- scss:rules --*/
+/* === Quarto + Custom Theme for vanhungtran.github.io === */
+
+.display-font { font-family: 'Playfair Display', serif; }
+.code-font { font-family: 'JetBrains Mono', monospace; }
+
+/* Color palette */
+:root {
+  --navy: #1a2332;
+  --charcoal: #2d3748;
+  --white: #f8fafc;
+  --teal: #38b2ac;
+  --coral: #e53e3e;
+  --lavender: #9f7aea;
+  --blue-accent: #4299e1;
+}
+
+/* Body - port the gradient background */
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+  min-height: 100vh;
+}
+
+/* Glassmorphism cards */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navbar override */
+.navbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Project cards */
+.data-card, .project-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.data-card:hover, .project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, var(--blue-accent), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Metric cards */
+.metric-card {
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(56, 178, 172, 0.1));
+  border-left: 4px solid var(--blue-accent);
+}
+
+/* Technology badges */
+.tech-badge {
+  transition: all 0.2s ease;
+}
+.tech-badge:hover {
+  transform: scale(1.1);
+}
+
+/* Impact metric */
+.impact-metric {
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(56, 178, 172, 0.1));
+  border-left: 4px solid var(--blue-accent);
+}
+
+/* Filter buttons */
+.filter-btn {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--blue-accent), var(--teal));
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Skill items */
+.skill-item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.skill-item:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--blue-accent), var(--teal));
+}
+
+/* Floating animation */
+.floating-element, .floating-data {
+  animation: float 8s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Typewriter */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--blue-accent);
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--blue-accent); }
+}
+
+/* Particles canvas */
+#particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Page footer */
+.nav-footer {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Code blocks */
+.code-block {
+  background: var(--navy);
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* Step indicator */
+.step-indicator {
+  background: linear-gradient(135deg, var(--blue-accent), var(--teal));
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(135deg, var(--blue-accent), var(--teal));
+  z-index: 1000;
+  transition: width 0.1s ease;
+}
+
+/* Blog article cards */
+.article-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.article-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Tag cloud */
+.tag {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.tag:hover { transform: scale(1.1); }
+.tag.active {
+  background: linear-gradient(135deg, var(--blue-accent), var(--teal));
+  color: white;
+}
+
+/* Search box focus */
+.search-box {
+  transition: all 0.3s ease;
+}
+.search-box:focus-within {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(66, 153, 225, 0.2);
+}
+
+/* Article content */
+.article-content { line-height: 1.8; }
+.article-content h2 { color: var(--charcoal); margin: 2rem 0 1rem 0; font-size: 1.5rem; font-weight: 600; }
+.article-content h3 { color: #4a5568; margin: 1.5rem 0 0.75rem 0; font-size: 1.25rem; font-weight: 600; }
+.article-content p { margin-bottom: 1rem; color: #4a5568; }
+.article-content ul, .article-content ol { margin: 1rem 0; padding-left: 2rem; }
+.article-content li { margin-bottom: 0.5rem; color: #4a5568; }
+.article-content blockquote {
+  border-left: 4px solid var(--blue-accent);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #718096;
+  background: rgba(66, 153, 225, 0.05);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Modal */
+.modal {
+  backdrop-filter: blur(10px);
+}
+
+/* Chart container */
+.chart-container {
+  min-height: 400px;
+}
+
+/* Responsive image */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utility: object-fit helpers */
+.object-cover { object-fit: cover; }
+.object-contain { object-fit: contain; }
+
+/* Remove Quarto default margins on pages that use full-width hero */
+body.quarto-dark { background: inherit; }

@@ -1,0 +1,123 @@
+---
+title: "Biostatistics & Data Science Portfolio"
+description: "Lucas VHH TRAN — Biomarker Biostatistician & Data Scientist"
+---
+
+```{=html}
+<script src="https://cdn.tailwindcss.com"></script>
+<div id="particles-canvas"></div>
+
+<section class="pt-8 pb-8 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <img src="resources/hero-data-science.jpg" alt="Data Science" class="w-full h-full object-cover">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="floating-data absolute top-10 left-10 text-2xl opacity-60">📈</div>
+                <div class="floating-data absolute top-20 right-20 text-xl opacity-50" style="animation-delay: -2s;">🔬</div>
+                <div class="floating-data absolute bottom-10 left-1/4 text-lg opacity-40" style="animation-delay: -4s;">💡</div>
+                
+                <h2 class="display-font text-4xl lg:text-5xl text-gray-800 mb-4">
+                    <span class="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+                        Biomarker Biostatistician & Data Scientist
+                    </span>
+                </h2>
+                <div class="typewriter text-xl text-gray-600 mb-6">
+                    Transforming Medical Data into Clinical Insights
+                </div>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    With over 10 years of experience, I specialize in biostatistics and bioinformatics, with a focus on biomarker discovery using multi-omics datasets. 
+                    At CK-CARE, I contribute to data management and the development of advanced analysis pipelines, leveraging statistical, machine learning, and deep learning techniques to uncover actionable insights for disease diagnostics and treatment.
+                </p>
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <div class="metric-card px-4 py-2 rounded-lg"><div class="text-2xl font-bold text-blue-600">48</div><div class="text-sm text-gray-600">GitHub Repos</div></div>
+                    <div class="metric-card px-4 py-2 rounded-lg"><div class="text-2xl font-bold text-teal-600">10+</div><div class="text-sm text-gray-600">Years Experience</div></div>
+                    <div class="metric-card px-4 py-2 rounded-lg"><div class="text-2xl font-bold text-purple-600">37</div><div class="text-sm text-gray-600">Public Projects</div></div>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="CVLucasTRAN.pdf" download="Lucas_TRAN_CV.pdf" class="inline-flex items-center bg-gradient-to-r from-blue-500 to-teal-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all hover:scale-105">
+                        Download CV
+                    </a>
+                    <a href="projects.qmd" class="inline-flex items-center bg-white text-gray-700 px-6 py-3 rounded-lg font-medium border border-gray-300 hover:bg-gray-50 transition-all hover:scale-105">
+                        View Projects
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <img src="profile-photo2.png" alt="Lucas VHH TRAN" class="w-64 h-64 rounded-full object-cover shadow-2xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h3 class="display-font text-3xl text-gray-800 text-center mb-8">Professional Experience</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="glass-effect rounded-2xl p-8">
+            <h4 class="font-semibold text-gray-800 mb-6">Work Experience</h4>
+            <div class="space-y-6">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <div class="flex items-center justify-between mb-2"><h5 class="font-medium text-gray-800">Biostatistician/Bioinformatician</h5><span class="text-sm text-gray-500">Nov 2022 - Present</span></div>
+                    <p class="text-sm text-gray-600">CK-CARE, Switzerland</p>
+                    <p class="text-sm text-gray-700">Multi-omics biomarker discovery, data analysis pipelines, machine learning for allergy research</p>
+                </div>
+                <div class="border-l-4 border-teal-500 pl-4">
+                    <div class="flex items-center justify-between mb-2"><h5 class="font-medium text-gray-800">Biomarker Statistician - Oncology</h5><span class="text-sm text-gray-500">Apr 2022 - Oct 2022</span></div>
+                    <p class="text-sm text-gray-600">Sanofi-Aventis France, Paris</p>
+                    <p class="text-sm text-gray-700">Statistical analysis plans, R package development, oncology biomarker R&D</p>
+                </div>
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <div class="flex items-center justify-between mb-2"><h5 class="font-medium text-gray-800">Data Scientist</h5><span class="text-sm text-gray-500">May 2020 - Feb 2022</span></div>
+                    <p class="text-sm text-gray-600">ENDODIAG, Paris</p>
+                    <p class="text-sm text-gray-700">AI/ML for endometriosis diagnosis, high-dimensional biomedical data analysis</p>
+                </div>
+            </div>
+        </div>
+        <div class="glass-effect rounded-2xl p-8">
+            <h4 class="font-semibold text-gray-800 mb-6">Education</h4>
+            <div class="space-y-6">
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <div class="flex items-center justify-between mb-2"><h5 class="font-medium text-gray-800">PhD in Pathology, Toxicology & Genetics</h5><span class="text-sm text-gray-500">2015 - 2018</span></div>
+                    <p class="text-sm text-gray-600">Toulouse INP</p>
+                    <p class="text-sm text-gray-700">Biostatistics, Bioinformatics, Quantitative Genetics</p>
+                </div>
+                <div class="border-l-4 border-orange-500 pl-4">
+                    <div class="flex items-center justify-between mb-2"><h5 class="font-medium text-gray-800">Master's in Biostatistics & Bioinformatics</h5><span class="text-sm text-gray-500">2014 - 2015</span></div>
+                    <p class="text-sm text-gray-600">Université Claude Bernard Lyon 1</p>
+                    <p class="text-sm text-gray-700">Mention Bien — Healthcare Applications</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h3 class="display-font text-3xl text-gray-800 text-center mb-8">Key Skills</h3>
+    <div class="glass-effect rounded-3xl p-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 text-center">
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">📊</div><h4 class="font-semibold text-gray-800 text-sm">R / Bioconductor</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">🐍</div><h4 class="font-semibold text-gray-800 text-sm">Python</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">🧬</div><h4 class="font-semibold text-gray-800 text-sm">Genomics</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">✨</div><h4 class="font-semibold text-gray-800 text-sm">Shiny Apps</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">📦</div><h4 class="font-semibold text-gray-800 text-sm">R Packages</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">📖</div><h4 class="font-semibold text-gray-800 text-sm">Quarto/Rmd</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">🧠</div><h4 class="font-semibold text-gray-800 text-sm">ML / DL</h4></div>
+            <div class="skill-item glass-effect rounded-xl p-4"><div class="text-2xl mb-2">🌐</div><h4 class="font-semibold text-gray-800 text-sm">Web Dev</h4></div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+    <h3 class="display-font text-3xl text-gray-800 text-center mb-6">Let's Connect</h3>
+    <div class="flex flex-wrap justify-center gap-6">
+        <a href="https://www.linkedin.com/in/lucas-vh-t-b9836283" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium">LinkedIn</a>
+        <a href="https://github.com/vanhungtran" target="_blank" class="text-gray-600 hover:text-gray-800 font-medium">GitHub</a>
+        <a href="https://rpubs.com/hung/" target="_blank" class="text-purple-600 hover:text-purple-800 font-medium">RPubs</a>
+        <a href="mailto:tranhungydhcm@gmail.com" class="text-teal-600 hover:text-teal-800 font-medium">Email</a>
+        <a href="CVLucasTRAN.pdf" download class="text-orange-600 hover:text-orange-800 font-medium">CV PDF</a>
+    </div>
+</section>
+
+<script src="main.js"></script>
+```

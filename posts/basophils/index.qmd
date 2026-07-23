@@ -1,0 +1,11 @@
+---
+title: "Basophils in Allergic Inflammation"
+description: "Analysis of basophil biology and their role as effector cells in allergic diseases and inflammatory responses"
+date: "2024-10-20"
+categories: [Immunology, Allergy]
+image: "../Post/basophils.png"
+---
+
+```{=html}
+<iframe src="../../Post/basophils.html" style="width:100%; height:100vh; border:none;"></iframe>
+```

@@ -1,0 +1,11 @@
+---
+title: "Open Databases for Biomedical Research"
+description: "Curated guide to public biomedical databases and resources for genomics, proteomics, and clinical research data"
+date: "2024-08-01"
+categories: [Bioinformatics, Data Resources]
+image: "../Post/opendatabase.png"
+---
+
+```{=html}
+<iframe src="../../Post/opendatabase.html" style="width:100%; height:100vh; border:none;"></iframe>
+```

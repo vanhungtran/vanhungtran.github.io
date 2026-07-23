@@ -1,0 +1,55 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - projects.qmd
+    - blog.qmd
+    - posts/
+
+website:
+  title: "Lucas VHH TRAN"
+  site-url: https://vanhungtran.github.io
+  repo-url: https://github.com/vanhungtran/vanhungtran.github.io
+  favicon: assets/favicon.ico
+  open-graph: true
+  twitter-card: true
+  
+  navbar:
+    left:
+      - text: "Portfolio"
+        href: index.qmd
+      - text: "Projects"
+        href: projects.qmd
+      - text: "Blog"
+        href: blog.qmd
+      - text: "CV"
+        href: CVLucasTRAN.pdf
+  
+  page-footer:
+    center: |
+      © 2025 Lucas VHH TRAN. Transforming data into insights, one analysis at a time.
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    mainfont: Inter, sans-serif
+    monofont: JetBrains Mono, monospace
+    toc: true
+    code-fold: false
+    code-tools: false
+    css:
+      - https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
+    include-in-header:
+      - text: |
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+execute:
+  freeze: auto

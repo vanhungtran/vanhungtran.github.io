@@ -1,0 +1,11 @@
+---
+title: "Advances in Atopic Dermatitis Therapy"
+description: "Overview of therapeutic approaches for atopic dermatitis including biologics, JAK inhibitors, and emerging treatments"
+date: "2024-11-15"
+categories: [Clinical Research, Dermatology]
+image: "../Post/AD_Pso.png"
+---
+
+```{=html}
+<iframe src="../../Post/ADtherapy.html" style="width:100%; height:100vh; border:none;"></iframe>
+```

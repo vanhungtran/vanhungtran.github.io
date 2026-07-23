@@ -1,0 +1,11 @@
+---
+title: "Creating R Packages: A Practical Guide"
+description: "Step-by-step tutorial on building, documenting, testing, and publishing R packages with devtools, roxygen2, and pkgdown"
+date: "2024-09-10"
+categories: [R Programming, Software Development]
+image: "../Post/creat_R_package.png"
+---
+
+```{=html}
+<iframe src="../../Post/creat_R_package.html" style="width:100%; height:100vh; border:none;"></iframe>
+```

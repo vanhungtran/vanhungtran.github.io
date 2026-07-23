@@ -1,0 +1,11 @@
+---
+title: "Data Science Roles in Healthcare"
+description: "Exploring the diverse career paths and roles for data scientists and biostatisticians in the healthcare and pharmaceutical industries"
+date: "2024-07-15"
+categories: [Career, Healthcare]
+image: "../Post/DataRoles.jpg"
+---
+
+```{=html}
+<iframe src="../../Post/Roles.html" style="width:100%; height:100vh; border:none;"></iframe>
+```
